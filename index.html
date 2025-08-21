@@ -24,6 +24,172 @@
   <link rel="icon" href="/favicon.ico" />
 
   <style>
+      /* --- Hamburger Menu for Mobile --- */
+      .hamburger {
+        display: none;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 38px;
+        height: 38px;
+        background: rgba(255,255,255,0.95);
+        border-radius: 8px;
+        border: 1px solid var(--line);
+        cursor: pointer;
+        z-index: 102;
+        transition: box-shadow .18s;
+        box-shadow: 0 2px 12px rgba(156,107,62,0.07);
+      }
+      .hamburger span {
+        display: block;
+        width: 22px;
+        height: 3px;
+        margin: 3px 0;
+        background: var(--accent);
+        border-radius: 2px;
+        transition: all .25s;
+      }
+      .hamburger.active span:nth-child(1) {
+        transform: translateY(6px) rotate(45deg);
+      }
+      .hamburger.active span:nth-child(2) {
+        opacity: 0;
+      }
+      .hamburger.active span:nth-child(3) {
+        transform: translateY(-6px) rotate(-45deg);
+      }
+
+    /* --- Navigation Menu Improvements --- */
+    .nav-inner {
+      gap: 2.5rem;
+    }
+    .menu {
+      display: flex;
+      align-items: center;
+      gap: 2.2rem;
+      font-size: 1.08em;
+      font-weight: 600;
+      background: rgba(255,255,255,0.85);
+      border-radius: 999px;
+      box-shadow: 0 2px 12px rgba(156,107,62,0.07);
+      padding: .35em 1.5em;
+      margin-left: 1.5em;
+      transition: box-shadow .2s;
+        position: relative;
+        z-index: 101;
+    }
+    .menu a.link {
+      padding: .3em .7em;
+      border-radius: 6px;
+      transition: background .18s, color .18s;
+    }
+    .menu a.link:hover, .menu a.link:focus {
+      background: var(--accent-2);
+      color: #fff;
+    }
+    @media (max-width: 900px) {
+      .nav-inner { gap: 1.2rem; }
+      .menu { gap: 1.1rem; padding: .25em .7em; margin-left: .5em; font-size: 1em; }
+    }
+      @media (max-width: 700px) {
+          .nav-inner {
+            flex-direction: row;
+            align-items: center;
+            gap: 0.5rem;
+          }
+          .brand-logo img {
+            width: 90px !important;
+            height: 36px !important;
+          }
+          .nav-inner > div[style*="display:flex"] {
+            flex: 1 1 0%;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 0.5rem;
+            position: relative;
+          }
+          .hamburger {
+            display: flex;
+            margin-left: 0;
+            margin-right: 0.2rem;
+            position: static;
+            order: 3;
+          }
+          .menu {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: .2rem;
+            margin-left: 0;
+            box-shadow: none;
+            border-radius: 12px;
+            padding: .5em 1em;
+            position: absolute;
+            top: 60px;
+            right: 1.5rem;
+            background: #fff;
+            min-width: 170px;
+            display: none;
+            border: 1px solid var(--line);
+            z-index: 200;
+          }
+          .menu.open {
+            display: flex;
+            animation: fadeInMenu .18s;
+          }
+          @keyframes fadeInMenu {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+          }
+          .cta {
+            margin-left: auto;
+            margin-right: 0.2rem;
+            font-size: 1em;
+            padding: .6rem .8rem;
+            display: inline-flex;
+          }
+        }
+    /* --- Professional Footer Styles --- */
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1.2fr 1.5fr 1.2fr;
+      gap: 2.5rem;
+      padding: 2.5rem 0 1.2rem 0;
+      border-top: 1px solid var(--line);
+      align-items: flex-start;
+    }
+    .footer-brand img { margin-bottom: .7em; }
+    .footer-brand h3 { font-size: 1.3em; margin-bottom: .2em; }
+    .footer-links ul, .footer-contact ul { list-style: none; padding: 0; margin: 0; }
+    .footer-links li, .footer-contact li { margin-bottom: .5em; }
+    .footer-links a, .footer-contact a { color: var(--ink); opacity: .95; transition: color .2s; }
+    .footer-links a:hover, .footer-contact a:hover { color: var(--accent); }
+    .footer-links h4, .footer-contact h4, .footer-social h4 { font-size: 1.08em; margin-bottom: .7em; color: var(--accent); letter-spacing: .04em; }
+    .footer-social .footer-icons { display: flex; gap: 1.1em; margin-top: .2em; }
+    .footer-social a { color: var(--accent); font-size: 1.5em; transition: color .2s; }
+    .footer-social a:hover { color: var(--ink); }
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: .98em;
+      opacity: .8;
+      border-top: 1px solid var(--line);
+      padding: 1.1em 0 .2em 0;
+      margin-top: 1.2em;
+      flex-wrap: wrap;
+      gap: 1em;
+    }
+    @media (max-width: 900px) {
+      .footer-grid { grid-template-columns: 1fr 1fr 1fr; gap: 1.5rem; }
+      .footer-social { grid-column: span 3; margin-top: 1.5em; }
+    }
+    @media (max-width: 600px) {
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+      .footer-brand { grid-column: span 2; text-align: center; margin-bottom: 1em; }
+      .footer-social { grid-column: span 2; justify-self: center; margin-top: 1em; }
+      .footer-bottom { flex-direction: column; gap: .5em; text-align: center; }
+    }
     :root{
       --bg:#FAF6F0;          /* parchment */
       --ink:#2A1C12;         /* rich brown text */
@@ -71,8 +237,23 @@
     /* Hero */
     .hero{position:relative; isolation:isolate;}
     .hero-media{position:absolute; inset:0; z-index:-1; overflow:hidden;}
-    .hero-media::before{content:""; position:absolute; inset:-10%; background:url('https://images.unsplash.com/photo-1517686469429-d7fcd480eaad?q=80&w=1860&auto=format&fit=crop') center/cover no-repeat; filter:grayscale(.1) contrast(1.05);}
-    .hero-media::after{content:""; position:absolute; inset:0; background:linear-gradient(180deg, rgba(32,22,14,.55), rgba(250,246,240,.85) 60%, var(--bg));}
+    .hero-media-bg {
+      position:absolute; inset:-10%; width:120%; height:120%;
+      background-size:cover; background-position:center;
+      transition:opacity 1.2s cubic-bezier(.4,0,.2,1);
+      will-change:opacity,background-image;
+      filter:grayscale(.1) contrast(1.05);
+      opacity:0;
+    }
+    .hero-media-bg.active { opacity:1; z-index:1; }
+    .hero-media::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      /* Make gradient even lighter and less opaque for more visible image */
+      background:linear-gradient(180deg, rgba(32,22,14,.13), rgba(250,246,240,.38) 75%, var(--bg));
+      z-index:2;
+    }
     .hero-inner{padding:min(16vh,7rem) 0 6rem; text-align:center}
     .hero h1{color:#fff; text-shadow:0 2px 12px rgba(0,0,0,.35)}
     .hero p.lead{font-size:clamp(1rem, 1vw + .8rem, 1.35rem); color:#fff; opacity:.95; max-width:860px; margin:.75rem auto 1.2rem; text-shadow:0 1px 6px rgba(0,0,0,.35)}
@@ -88,8 +269,13 @@
 
     /* Cards & grids */
     .cards{display:grid; grid-template-columns:repeat(4,1fr); gap:1rem}
+    #why .cards { grid-template-columns:repeat(3,1fr); }
     @media (max-width:1000px){.cards{grid-template-columns:repeat(2,1fr)}}
     @media (max-width:560px){.cards{grid-template-columns:1fr}}
+    /* Custom: 2 by 2 for #why section on small screens */
+    @media (max-width:700px){
+      #why .cards { grid-template-columns:repeat(2,1fr) !important; }
+    }
     .card{background:#fff; border:1px solid var(--line); border-radius:16px; padding:1rem; box-shadow:0 10px 28px rgba(0,0,0,.05)}
     .pill{display:inline-flex; align-items:center; gap:.5rem; padding:.35rem .6rem; border-radius:999px; border:1px solid var(--line); background:#fff}
 
@@ -119,26 +305,33 @@
     <div class="wrap nav-inner">
       <div class="brand">
         <div class="brand-logo" aria-hidden="true" style="padding:0; background:none; box-shadow:none">
-          <img src="img/logo_2.png" alt="Matara Spice Co. Logo" style="width:40px; height:40px; border-radius:10px; display:block; object-fit:contain; background:#fff" />
-        </div>
-        <div>
-          <h3 style="margin:0">Matara Spice Co.</h3>
-          <div class="tagline">The World's Purest Cinnamon – From Sri Lanka with Love</div>
+          <img src="img/logo_croped.png" alt="Matara Spice Co. Logo" style="width:100px; height:40px; border-radius:10px; display:block; object-fit:contain" />
         </div>
       </div>
-      <div>
-        <a class="link" href="#story">Our Story</a>
-        <a class="link" href="#products">Products</a>
-        <a class="link" href="#why">Why Us</a>
-        <a class="link" href="#contact">Contact</a>
-  <a class="cta" href="#contact" onclick="openWhatsApp(); return false;">WhatsApp (SG) +65 9425 2874</a>
+      <div style="display:flex; align-items:center; gap:1.2rem; flex:1; justify-content:space-between; position:relative;">
+        <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mainMenu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <div class="menu" id="mainMenu">
+          <a class="link" href="#story">Our Story</a>
+          <a class="link" href="#products">Products</a>
+          <a class="link" href="#why">Why Us</a>
+          <a class="link" href="#contact">Contact</a>
+        </div>
+        <a class="cta" href="#contact" onclick="openWhatsApp(); return false;">Call us on WhatsApp</a>
       </div>
     </div>
   </nav>
 
   <!-- Hero -->
   <header class="hero" id="home">
-    <div class="hero-media" aria-hidden="true"></div>
+    <div class="hero-media" aria-hidden="true">
+      <div class="hero-media-bg" id="heroBg1" style="background-image:url('img/top1.jpg')"></div>
+      <div class="hero-media-bg" id="heroBg2" style="background-image:url('img/top2.jpg')"></div>
+      <div class="hero-media-bg" id="heroBg3" style="background-image:url('img/top3.jpg')"></div>
+    </div>
     <div class="wrap hero-inner">
   <span class="badge"><i class="ph ph-seal-check" aria-label="authentic" style="vertical-align:middle"></i> Authentic • Organic • Family Heritage</span>
       <h1>Authentic Ceylon Cinnamon, Crafted in Matara</h1>
@@ -190,13 +383,13 @@
       <p class="muted">Premium, small‑batch spices prepared by skilled artisans and shipped worldwide.</p>
       <div class="cards" role="list">
         <article class="card" role="listitem">
-          <img loading="lazy" alt="Ceylon Cinnamon Sticks" src="img/Cinamon_Quills.webp" style="width:100%;height:180px;object-fit:cover;border-radius:12px" />
+          <img loading="lazy" alt="Ceylon Cinnamon Sticks" src="img/Cinnamon-Quills-9.jpg" style="width:100%;height:180px;object-fit:cover;border-radius:12px" />
           <h3>Ceylon Cinnamon Sticks (Quills)</h3>
           <p>Hand‑peeled by skilled artisans for delicate sweetness and aroma.</p>
           <div class="pill"><span class="check"><i class="ph ph-check" aria-label="check"></i></span> True <em>Cinnamomum verum</em></div>
         </article>
         <article class="card" role="listitem">
-          <img loading="lazy" alt="Ceylon Cinnamon Powder" src="img/Cinnamon-Quills-9.jpg" style="width:100%;height:180px;object-fit:cover;border-radius:12px" />
+          <img loading="lazy" alt="Ceylon Cinnamon Powder" src="img/Cinamon_Quills.webp" style="width:100%;height:180px;object-fit:cover;border-radius:12px" />
           <h3>Ceylon Cinnamon Powder</h3>
           <p>Finely ground from our finest quills — perfect for baking and beverages.</p>
           <div class="pill"><span class="check"><i class="ph ph-check" aria-label="check"></i></span> Single‑origin</div>
@@ -226,7 +419,7 @@
     <div class="wrap">
   <span class="kicker"><i class="ph ph-star" aria-label="why choose us" style="vertical-align:middle"></i> Why Choose Us</span>
       <h2>Premium Quality, Personal Heritage</h2>
-      <div class="cards" style="grid-template-columns:repeat(3,1fr)">
+  <div class="cards">
         <div class="card" style="display:flex; flex-direction:column; align-items:center; text-align:center; gap:.5rem; padding-top:2rem">
           <i class="ph ph-certificate" style="font-size:2.8rem; color:var(--accent); display:block;"></i>
           <h3 style="margin-top:.5rem">Authentic Ceylon Cinnamon</h3>
@@ -272,7 +465,7 @@
           <div><strong>Email:</strong> <a href="mailto:info@mataraspice.com">info@mataraspice.com</a></div>
           <div><strong>WhatsApp (Main Hotline):</strong> <a href="#" onclick="openWhatsApp(); return false;">+65 9425 2874 (Click to chat)</a></div>
           <div><strong>Singapore Hotline (Main):</strong> <a href="tel:+6594252874">+65 9425 2874</a></div>
-          <div><strong>Office (Sri Lanka):</strong> <a href="tel:+94412222812">+94 41 2222812</a></div>
+          <div><strong>Office (Sri Lanka):</strong> <a href="tel:+94412222812">+94 41 222 2812</a></div>
           <div><strong>Sri Lanka Hotline:</strong> <a href="tel:+94777517985">+94 77 751 7985</a></div>
           <div><strong>Australia Hotline:</strong> <a href="tel:+61416003975">+61 4160 03975</a></div>
           <div class="muted">Business hours: <span id="hours">09:00–17:00 (Sri Lanka Time, UTC+5:30)</span>. Current time in Colombo: <span id="lkTime">…</span> • Your local time: <span id="yourTime">…</span></div>
@@ -324,20 +517,90 @@
 
   <footer>
     <div class="wrap">
-  <div style="display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap">
-        <div>
-          <strong style="display:flex; align-items:center; gap:.5rem">
-            <img src="img/logo_2.png" alt="Matara Spice Co. Logo" style="width:1.6em; height:1.6em; border-radius:6px; vertical-align:middle; object-fit:contain; background:#fff; margin-right:.3em;" />
-            Matara Spice Co.
-          </strong>
-          <div class="mini">© <span id="year"></span> Matara Spice Co. All rights reserved.</div>
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="img/logo_2.png" alt="Matara Spice Co. Logo" style="width:48px; height:48px; border-radius:12px; object-fit:contain; background:#fff; margin-bottom:.7em;" />
+          <h3 style="margin:0 0 .3em 0; font-size:1.3em;">Matara Spice Co.</h3>
+          <div class="mini">The World's Purest Cinnamon</div>
         </div>
-        <div class="mini">Made with love in Sri Lanka • Singapore • Australia</div>
+        <div class="footer-links">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="#story">Our Story</a></li>
+            <li><a href="#products">Products</a></li>
+            <li><a href="#why">Why Us</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-contact">
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="mailto:info@mataraspice.com">info@mataraspice.com</a></li>
+            <li><a href="#" onclick="openWhatsApp(); return false;">WhatsApp: +65 9425 2874</a></li>
+            <li><a href="tel:+6594252874">Singapore: +65 9425 2874</a></li>
+          </ul>
+        </div>
+        <div class="footer-social">
+          <h4>Follow Us</h4>
+          <div class="footer-icons">
+            <a href="https://wa.me/6594252874" target="_blank" aria-label="WhatsApp"><i class="ph ph-whatsapp-logo"></i></a>
+            <a href="mailto:info@mataraspice.com" aria-label="Email"><i class="ph ph-envelope"></i></a>
+            <a href="https://www.instagram.com/" target="_blank" aria-label="Instagram"><i class="ph ph-instagram-logo"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Matara Spice Co. All rights reserved.</span>
+        <span>Made with love in Sri Lanka • Singapore • Australia</span>
       </div>
     </div>
   </footer>
 
   <script>
+    // --- Hero background rotator ---
+    (function heroBgRotator(){
+      const bgIds = ['heroBg1','heroBg2','heroBg3'];
+      const bgs = bgIds.map(id=>document.getElementById(id));
+      let idx = 0;
+      function showBg(i) {
+        bgs.forEach((bg, j) => {
+          if (bg) bg.classList.toggle('active', j === i);
+        });
+      }
+      showBg(idx);
+      setInterval(()=>{
+        idx = (idx+1)%bgs.length;
+        showBg(idx);
+      }, 5000);
+    })();
+
+    // --- Hamburger menu toggle for mobile ---
+    const hamburger = document.getElementById('hamburger');
+    const menu = document.getElementById('mainMenu');
+    if (hamburger && menu) {
+      hamburger.addEventListener('click', function() {
+        const isOpen = menu.classList.toggle('open');
+        hamburger.classList.toggle('active', isOpen);
+        hamburger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      });
+      // Close menu when clicking outside (mobile only)
+      document.addEventListener('click', function(e) {
+        if (window.innerWidth > 700) return;
+        if (!menu.contains(e.target) && !hamburger.contains(e.target)) {
+          menu.classList.remove('open');
+          hamburger.classList.remove('active');
+          hamburger.setAttribute('aria-expanded', 'false');
+        }
+      });
+      // Close menu on resize to desktop
+      window.addEventListener('resize', function() {
+        if (window.innerWidth > 700) {
+          menu.classList.remove('open');
+          hamburger.classList.remove('active');
+          hamburger.setAttribute('aria-expanded', 'false');
+        }
+      });
+    }
   // --- Configuration (Singapore is main hotline/WhatsApp) ---
   const WHATSAPP_NUMBER = '6594252874'; // Singapore number, country code + number, no +
   const PHONE_DISPLAY = '+65 9425 2874';
