@@ -21,7 +21,14 @@
   <meta property="og:image" content="https://mataraspice.com/og-image.jpg" />
 
   <meta name="theme-color" content="#50321E" />
-  <link rel="icon" href="/favicon.ico" />
+  <link rel="icon" href="favicon/favicon.ico" />
+  <!-- Platform icons -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+  <link rel="manifest" href="/favicon/site.webmanifest">
+  <!-- Google reCAPTCHA -->
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
   <style>
       /* --- Hamburger Menu for Mobile --- */
@@ -82,10 +89,12 @@
       padding: .3em .7em;
       border-radius: 6px;
       transition: background .18s, color .18s;
+      text-decoration: none;
     }
     .menu a.link:hover, .menu a.link:focus {
       background: var(--accent-2);
       color: #fff;
+      text-decoration: none;
     }
     @media (max-width: 900px) {
       .nav-inner { gap: 1.2rem; }
@@ -373,6 +382,7 @@
       <div class="hero-media-bg" id="heroBg1" style="background-image:url('img/top1.jpg')"></div>
       <div class="hero-media-bg" id="heroBg2" style="background-image:url('img/top2.jpg')"></div>
       <div class="hero-media-bg" id="heroBg3" style="background-image:url('img/top3.jpg')"></div>
+      <div class="hero-media-bg" id="heroBg4" style="background-image:url('img/top4.jpeg')"></div>
     </div>
     <div class="wrap hero-inner">
   <span class="badge"><i class="ph ph-seal-check" aria-label="authentic" style="vertical-align:middle"></i> Authentic • Organic • Family Heritage</span>
@@ -510,34 +520,34 @@
             <p class="mini muted" style="margin-top:0">Operational hours: 09:00–17:00 (UTC+5:30). Colombo time now: <strong id="lkTime">…</strong></p>
             <p><strong>Office:</strong> <a href="tel:+94412222812">+94 41 222 2812</a><br/>
                <strong>Hotline:</strong> <a href="tel:+94777517985">+94 77 751 7985</a></p>
-            <p><strong>Email:</strong> <a href="mailto:info@mataraspice.com">info@mataraspice.com</a></p>
+            <p><strong>Email:</strong> <a href="mailto:hello@mataraspice.com">hello@mataraspice.com</a></p>
           </article>
 
           <article class="card" role="listitem">
             <h3 style="display:flex; align-items:center; gap:.5rem; margin-bottom:.2rem"><i class="ph ph-map-pin-line" style="color:var(--accent)"></i> Singapore — Regional</h3>
             <p><strong>Hotline / WhatsApp:</strong> <a href="#" onclick="openWhatsApp(); return false;">+65 9425 2874</a></p>
-            <p><strong>Email:</strong> <a href="mailto:info@mataraspice.com">info@mataraspice.com</a></p>
+            <p><strong>Email:</strong> <a href="mailto:hello@mataraspice.com">hello@mataraspice.com</a></p>
             <p class="mini muted">Fastest response for APAC inquiries.</p>
           </article>
 
           <article class="card" role="listitem">
             <h3 style="display:flex; align-items:center; gap:.5rem; margin-bottom:.2rem"><i class="ph ph-map-pin-line" style="color:var(--accent)"></i> Sydney — Australia</h3>
             <p><strong>Hotline:</strong> <a href="tel:+61416003975">+61 4160 03975</a></p>
-            <p><strong>Email:</strong> <a href="mailto:info@mataraspice.com">info@mataraspice.com</a></p>
+            <p><strong>Email:</strong> <a href="mailto:hello@mataraspice.com">hello@mataraspice.com</a></p>
             <p class="mini muted">For ANZ distribution and partnerships.</p>
           </article>
 
           <article class="card" role="listitem">
             <h3 style="display:flex; align-items:center; gap:.5rem; margin-bottom:.2rem"><i class="ph ph-map-pin-line" style="color:var(--accent)"></i> Tokyo — Japan</h3>
             <p><strong>WhatsApp:</strong> <a href="#" onclick="openWhatsApp(); return false;">+65 9425 2874</a></p>
-            <p><strong>Email:</strong> <a href="mailto:info@mataraspice.com">info@mataraspice.com</a></p>
+            <p><strong>Email:</strong> <a href="mailto:hello@mataraspice.com">hello@mataraspice.com</a></p>
             <p class="mini muted">Japanese inquiries welcomed via WhatsApp or email.</p>
           </article>
         </div>
       </div>
 
-      <div class="contact-form">
-          <form class="card" id="contactForm" novalidate>
+    <div class="contact-form">
+      <form class="card" id="contactForm" action="https://formspree.io/f/xldwewjd" method="POST" novalidate>
         <h3>Send an Inquiry</h3>
         <div class="row">
           <label class="field">
@@ -570,9 +580,11 @@
           <span>Message*</span>
           <textarea required name="message" rows="5" placeholder="Tell us what you’re looking for…"></textarea>
         </label>
+    <!-- reCAPTCHA -->
+    <div class="g-recaptcha" data-sitekey="6LdNPa8rAAAAAIuIhANAqAT2I86lbjLeU5J1ldQy"></div>
     <div class="form-actions">
           <label class="consent">
-            <input type="checkbox" required />
+            <input type="checkbox" name="consent" value="yes" required />
             <span>I consent to be contacted by Matara Spice Co.</span>
           </label>
           <button id="contactSubmit" class="btn primary" type="submit">Send Inquiry</button>
@@ -601,7 +613,7 @@
         <div class="footer-contact">
           <h4>Contact</h4>
           <ul>
-            <li><a href="mailto:info@mataraspice.com">info@mataraspice.com</a></li>
+            <li><a href="mailto:hello@mataraspice.com">hello@mataraspice.com</a></li>
             <li><a href="#" onclick="openWhatsApp(); return false;">WhatsApp: +65 9425 2874</a></li>
             <li><a href="tel:+6594252874">Singapore: +65 9425 2874</a></li>
           </ul>
@@ -697,24 +709,61 @@
     }
     updateTimes(); setInterval(updateTimes, 30000);
 
-    // --- Simple contact form validation & mailto fallback ---
+    // --- Contact form: POST to Formspree ---
     const form = document.getElementById('contactForm');
     const formMsg = document.getElementById('formMsg');
-    form?.addEventListener('submit', (e)=>{
+    form?.addEventListener('submit', async (e)=>{
       e.preventDefault();
       if (!form.checkValidity()){
         formMsg.textContent = 'Please complete required fields and ensure inputs are valid.';
         formMsg.style.color = '#8B0000';
         return;
       }
-      const data = Object.fromEntries(new FormData(form).entries());
-      const subject = encodeURIComponent(`[${data.type || 'General'}] Inquiry from ${data.name}`);
-      const body = encodeURIComponent(`Name: ${data.name}\nEmail: ${data.email}\nPhone: ${data.phone || '-'}\nType: ${data.type || 'General'}\n\nMessage:\n${data.message}`);
-      const mailto = `mailto:info@mataraspice.com?subject=${subject}&body=${body}`;
-      window.location.href = mailto;
-      formMsg.textContent = 'Opening your email app… If nothing happens, email us at info@mataraspice.com';
+      // Validate reCAPTCHA
+      const hasCaptcha = !!document.querySelector('.g-recaptcha');
+      let captchaToken = '';
+      if (hasCaptcha) {
+        if (window.grecaptcha && typeof window.grecaptcha.getResponse === 'function') {
+          captchaToken = window.grecaptcha.getResponse();
+          if (!captchaToken) {
+            formMsg.textContent = "Please confirm you're not a robot.";
+            formMsg.style.color = '#8B0000';
+            return;
+          }
+        } else {
+          formMsg.textContent = 'Captcha not ready. Please wait a moment and try again.';
+          formMsg.style.color = '#8B0000';
+          return;
+        }
+      }
+      formMsg.textContent = 'Sending…';
       formMsg.style.color = 'var(--ink)';
-      form.reset();
+      try {
+        const fd = new FormData(form);
+        if (captchaToken) fd.append('g-recaptcha-response', captchaToken);
+        const res = await fetch(form.action, {
+          method: 'POST',
+          body: fd,
+          headers: { 'Accept': 'application/json' }
+        });
+        if (res.ok) {
+          formMsg.textContent = 'Thanks! Your message has been sent.';
+          formMsg.style.color = 'var(--ok)';
+          form.reset();
+          // Reset reCAPTCHA for subsequent submissions
+          if (window.grecaptcha && typeof window.grecaptcha.reset === 'function') {
+            window.grecaptcha.reset();
+          }
+        } else {
+          const data = await res.json().catch(()=>({}));
+          const err = data?.errors?.map(e=>e.message).join(', ') || 'Something went wrong. Please try again or email hello@mataraspice.com.';
+          formMsg.textContent = err;
+          formMsg.style.color = '#8B0000';
+        }
+      } catch (err) {
+        formMsg.textContent = 'Network error. Please try again or email hello@mataraspice.com.';
+        formMsg.style.color = '#8B0000';
+      }
     });
 
     // --- Year ---
@@ -728,19 +777,45 @@
     "@type": "Organization",
     "name": "Matara Spice Co.",
     "url": "https://mataraspice.com/",
-    "logo": "https://mataraspice.com/logo.png",
+    "logo": "https://mataraspice.com/img/logo_2.png",
     "sameAs": [
-      "https://wa.me/947XXXXXXXX"
+      "https://wa.me/6594252874"
     ],
     "description": "Authentic, organic Ceylon cinnamon grown and crafted by a family business in Matara, Sri Lanka.",
     "areaServed": "Worldwide",
-    "contactPoint": {
-      "@type": "ContactPoint",
-      "contactType": "customer support",
-      "email": "info@mataraspice.com",
-      "telephone": "+94XXXXXXXXX",
-      "availableLanguage": ["en"]
-    }
+    "contactPoint": [
+      {
+        "@type": "ContactPoint",
+        "contactType": "customer support",
+        "areaServed": "Singapore",
+        "telephone": "+6594252874",
+        "email": "hello@mataraspice.com",
+        "availableLanguage": ["en"]
+      },
+      {
+        "@type": "ContactPoint",
+        "contactType": "customer support",
+        "areaServed": "Sri Lanka",
+        "telephone": "+94412222812",
+        "email": "hello@mataraspice.com",
+        "availableLanguage": ["en"]
+      },
+      {
+        "@type": "ContactPoint",
+        "contactType": "sales",
+        "areaServed": "Australia",
+        "telephone": "+61416003975",
+        "email": "hello@mataraspice.com",
+        "availableLanguage": ["en"]
+      },
+      {
+        "@type": "ContactPoint",
+        "contactType": "customer support",
+        "areaServed": "Japan",
+        "email": "hello@mataraspice.com",
+        "availableLanguage": ["en"]
+      }
+    ]
   }
   </script>
 
@@ -750,10 +825,10 @@
     "@type": "ItemList",
     "name": "Matara Spice Co. Products",
     "itemListElement": [
-      {"@type":"Product", "name":"Ceylon Cinnamon Sticks (Quills)", "brand":"Matara Spice Co.", "category":"Spices"},
-      {"@type":"Product", "name":"Ceylon Cinnamon Powder", "brand":"Matara Spice Co.", "category":"Spices"},
-      {"@type":"Product", "name":"Ceylon Cinnamon Leaves", "brand":"Matara Spice Co.", "category":"Spices"},
-      {"@type":"Product", "name":"Pure Cinnamon Oil", "brand":"Matara Spice Co.", "category":"Spices"}
+  {"@type":"Product", "name":"Ceylon Cinnamon Sticks (Quills)", "brand":"Matara Spice Co.", "category":"Spices", "image":"https://mataraspice.com/img/Cinnamon-Quills-9.jpg"},
+  {"@type":"Product", "name":"Ceylon Cinnamon Powder", "brand":"Matara Spice Co.", "category":"Spices", "image":"https://mataraspice.com/img/Cinamon_Quills.webp"},
+  {"@type":"Product", "name":"Ceylon Cinnamon Leaves", "brand":"Matara Spice Co.", "category":"Spices", "image":"https://mataraspice.com/img/cinnamon-leaves.jpg"},
+  {"@type":"Product", "name":"Pure Cinnamon Oil", "brand":"Matara Spice Co.", "category":"Spices", "image":"https://mataraspice.com/img/cinnamon-essential-oil.webp"}
     ]
   }
   </script>
