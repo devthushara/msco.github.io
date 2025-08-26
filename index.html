@@ -27,8 +27,7 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
   <link rel="manifest" href="/favicon/site.webmanifest">
-  <!-- Google reCAPTCHA -->
-  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+  
 
   <style>
       /* --- Hamburger Menu for Mobile --- */
@@ -580,8 +579,6 @@
           <span>Message*</span>
           <textarea required name="message" rows="5" placeholder="Tell us what you’re looking for…"></textarea>
         </label>
-    <!-- reCAPTCHA -->
-    <div class="g-recaptcha" data-sitekey="6LdMR7MrAAAAAO7WqyzNaXVNUFrR32YuDHI6OwMw"></div>
     <div class="form-actions">
           <label class="consent">
             <input type="checkbox" name="consent" value="yes" required />
@@ -719,23 +716,6 @@
         formMsg.style.color = '#8B0000';
         return;
       }
-      // Validate reCAPTCHA
-      const hasCaptcha = !!document.querySelector('.g-recaptcha');
-      let captchaToken = '';
-      if (hasCaptcha) {
-        if (window.grecaptcha && typeof window.grecaptcha.getResponse === 'function') {
-          captchaToken = window.grecaptcha.getResponse();
-          if (!captchaToken) {
-            formMsg.textContent = "Please confirm you're not a robot.";
-            formMsg.style.color = '#8B0000';
-            return;
-          }
-        } else {
-          formMsg.textContent = 'Captcha not ready. Please wait a moment and try again.';
-          formMsg.style.color = '#8B0000';
-          return;
-        }
-      }
       formMsg.textContent = 'Sending…';
       formMsg.style.color = 'var(--ink)';
       try {
@@ -749,10 +729,6 @@
           formMsg.textContent = 'Thanks! Your message has been sent.';
           formMsg.style.color = 'var(--ok)';
           form.reset();
-          // Reset reCAPTCHA for subsequent submissions
-          if (window.grecaptcha && typeof window.grecaptcha.reset === 'function') {
-            window.grecaptcha.reset();
-          }
         } else {
           const data = await res.json().catch(()=>({}));
           const err = data?.errors?.map(e=>e.message).join(', ') || 'Something went wrong. Please try again or email hello@mataraspice.com.';
