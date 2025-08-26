@@ -740,7 +740,6 @@
       formMsg.style.color = 'var(--ink)';
       try {
         const fd = new FormData(form);
-        if (captchaToken) fd.append('g-recaptcha-response', captchaToken);
         const res = await fetch(form.action, {
           method: 'POST',
           body: fd,
@@ -759,10 +758,12 @@
           const err = data?.errors?.map(e=>e.message).join(', ') || 'Something went wrong. Please try again or email hello@mataraspice.com.';
           formMsg.textContent = err;
           formMsg.style.color = '#8B0000';
+          console.error('Formspree 400/4xx', { status: res.status, data });
         }
       } catch (err) {
         formMsg.textContent = 'Network error. Please try again or email hello@mataraspice.com.';
         formMsg.style.color = '#8B0000';
+        console.error('Formspree request failed', err);
       }
     });
 
