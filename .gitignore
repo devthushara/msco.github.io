@@ -1,0 +1,54 @@
+# macOS system files
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+.Spotlight-V100
+.Trashes
+.fseventsd
+
+# Resource forks
+._*
+
+# Node / tooling caches (in case you experiment locally)
+node_modules/
+.npm/
+.pnpm-store/
+.yarn/
+.yarn-cache/
+
+# Build outputs
+.dist/
+dist/
+build/
+.cache/
+.parcel-cache/
+.sass-cache/
+.next/
+out/
+coverage/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+*.log
+
+# Editors/IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# OS/Windows leftovers (just in case)
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
