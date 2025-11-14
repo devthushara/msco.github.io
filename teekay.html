@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Matara Spice Co. — Your Regional Representative</title>
+  <meta name="description" content="Direct contact page for your nearest Matara Spice Co. representative." />
+  <meta property="og:title" content="Matara Spice Co. — Your Regional Representative" />
+  <meta property="og:description" content="Direct contact page for your nearest Matara Spice Co. representative." />
+  <meta property="og:image" content="/img/og-default.jpg" />
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.0.3/src/regular/style.css">
+  <link rel="icon" href="favicon/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+  <link rel="manifest" href="/favicon/site.webmanifest">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roca+One:wght@400;700&family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#FAF6F0;
+      --ink:#2A1C12;
+      --accent:#9C6B3E;
+      --accent-2:#C08B5A;
+      --line:#E7DFD6;
+      --ok:#1C7C54;
+    }
+  /* Navigation removed for profile landing page */
+    html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; background:var(--bg); color:var(--ink);}
+    .wrap{width:min(980px,94%);margin:0 auto;padding:2.2rem 0}
+    .card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:1.25rem;box-shadow:0 10px 28px rgba(0,0,0,.05)}
+    .center{display:flex;flex-direction:column;align-items:center;text-align:center}
+    h1,h2,h3{font-family:'Roca One', 'Playfair Display', Georgia, serif;margin:0}
+    h1{font-size:1.25rem;color:var(--accent);letter-spacing:.06em}
+    h2{font-size:1.6rem;margin:.6rem 0}
+    .muted{color:#6b5a4a;opacity:.9}
+    .subtitle{font-size:.92rem;color:#7a6a5a;margin-top:.35rem}
+    .avatar{width:138px;height:138px;border-radius:999px;overflow:hidden;border:6px solid #fff;box-shadow:0 8px 30px rgba(156,107,62,.12);background:#eee}
+  .avatar img{width:100%;height:100%;object-fit:cover;display:block}
+  .media-row{display:flex;align-items:center;gap:.8rem}
+  .logo-inline{width:138px;height:138px;border-radius:999px;overflow:hidden}
+  .logo-inline img{width:100%;height:100%;object-fit:cover;display:block}
+  .bio{margin-top:.9rem;font-size:1rem;line-height:1.4;color:var(--ink)}
+
+  /* Profile meta layout */
+  .profile-meta{display:flex;align-items:center;gap:.6rem;margin-top:.5rem}
+  .profile-meta h2{margin:0}
+  .vcard-inline{margin-left:.6rem;display:flex;align-items:center;gap:.45rem;flex-wrap:wrap}
+  .vcard-inline .btn{padding:.55rem .75rem;font-size:.95rem;border-radius:10px}
+
+    /* Quick actions */
+    .actions{display:grid;grid-template-columns:repeat(2,1fr);gap:.7rem;margin-top:1rem}
+    .btn{display:inline-flex;align-items:center;gap:.6rem;justify-content:center;padding:.9rem 1rem;border-radius:12px;border:1px solid var(--line);background:#fff;font-weight:700}
+    .btn.large{padding:1rem;border-radius:14px;font-size:1.02rem}
+    .btn.primary{background:var(--accent);color:#fff;border-color:transparent}
+    .btn.whatsapp{background:#25D366;color:#fff;border-color:transparent}
+    .btn.call{background:#f6f3ef;color:var(--ink)}
+    .btn.email{background:#fff;color:var(--ink)}
+    .btn.vcard{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#fff}
+    .icon{font-size:1.15rem}
+    .small{font-size:.88rem}
+
+    @media (max-width:520px){
+  .wrap{padding:1.1rem 0}
+  .profile-meta{flex-direction:column;align-items:center}
+  .vcard-inline{margin-left:0}
+  .actions{grid-template-columns:1fr;}
+  .avatar{width:120px;height:120px}
+  .btn{padding:1rem;font-size:1.02rem}
+    }
+    /* remove underlines from links for cleaner QR landing appearance */
+    a { text-decoration: none; color: inherit; }
+    a.btn { text-decoration: none; }
+    a:focus { outline: 3px solid rgba(156,107,62,0.12); outline-offset:3px; }
+
+    /* Floating Home button (uses apple-touch-icon if available) */
+    .home-fab{
+      position:fixed;right:18px;bottom:18px;width:56px;height:56px;border-radius:50%;
+      background:#fff url('img/logo_2.webp') center/70% no-repeat;
+      box-shadow:0 8px 20px rgba(0,0,0,.12);border:1px solid var(--line);z-index:9999;display:inline-block
+    }
+    .home-fab:focus{box-shadow:0 10px 28px rgba(0,0,0,.16);}
+  /* Collapsible about section */
+  .collapsible{transition:all .28s ease;max-height:0;overflow:hidden}
+  .collapsible[hidden]{display:block;}
+  .collapsible.open{max-height:420px;padding-top:0.6rem}
+  /* small visual for About button when collapsed */
+  #aboutToggle{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#fff;border:transparent;border-radius:10px;padding:.55rem .75rem;font-size:.95rem;margin-left:.45rem}
+  </style>
+</head>
+<body>
+  <!-- Navigation intentionally removed for QR landing page -->
+  <main class="wrap">
+  <div class="card center">
+      <div style="max-width:420px;width:100%">
+        <div class="center">
+          <div class="media-row" style="gap:.9rem">
+            <div class="avatar" aria-hidden="false">
+              <img src="img/teekay.png" alt="Thushara Ranawaka — Matara Spice Co. representative photo" />
+            </div>
+            <a href="index.html" class="logo-inline" aria-label="Matara Spice Co. home" title="Home">
+              <img src="/img/logo_2.webp" alt="Matara Spice Co. logo" />
+            </a>
+          </div>
+          <h1 class="muted" style="margin-top:1rem">Your Regional Cinnamon Representative</h1>
+          <div class="profile-meta">
+            <h2>Thushara Ranawaka</h2>
+      <div class="vcard-inline">
+        <button id="saveVCard" class="btn vcard" type="button" aria-label="Save vCard"><i class="ph ph-download icon" aria-hidden="true"></i> Save vCard</button>
+        <button id="aboutToggle" class="btn vcard" type="button" aria-expanded="false" aria-controls="aboutSection"><i class="ph ph-user-circle icon" aria-hidden="true"></i> About</button>
+      </div>
+          </div>
+          <div class="subtitle">Co-Founder & Director – Business Development (Asia Region)</div>
+          <p class="small muted" style="margin-top:.6rem">Scan → Contact → Connect</p>
+        </div>
+
+        <div style="margin-top:1rem">
+          <div class="kicker" style="display:none">...contact</div>
+          <div class="actions">
+            <a class="btn call large" href="tel:+6594252874" aria-label="Call Thushara Ranawaka"><i class="ph ph-phone-call icon" aria-hidden="true"></i> Call</a>
+            <a class="btn whatsapp large" href="https://wa.me/6594252874?text=Hi%20I%20would%20like%20to%20know%20more%20about%20Matara%20Spice%20Co." aria-label="WhatsApp Thushara Ranawaka" target="_blank" rel="noopener"><i class="ph ph-whatsapp-logo icon" aria-hidden="true"></i> WhatsApp</a>
+            <a class="btn email large" href="mailto:thushara@mataraspice.com?subject=Inquiry%20for%20Thushara%20Ranawaka" aria-label="Email Thushara Ranawaka"><i class="ph ph-envelope icon" aria-hidden="true"></i> Email</a>
+            <a class="btn large" href="tel:+817091626937" aria-label="Direct Japan line"><i class="ph ph-phone-call icon" aria-hidden="true"></i> Japan</a>
+            <a class="btn large" href="https://line.me/R/ti/p/%40teeekayyyyy" aria-label="LINE chat" target="_blank" rel="noopener"><i class="ph ph-chat-text icon" aria-hidden="true"></i> LINE</a>
+            <!-- vCard button moved to profile header -->
+          </div>
+        </div>
+
+        <div style="margin-top:1.2rem;text-align:center;font-size:.9rem;color:#7a6a5a">
+          <p class="muted small">Available: Mon–Fri • 09:00–17:00 (SGT)</p>
+          <p class="small">For urgent wholesale requests, call or WhatsApp for fastest response.</p>
+        </div>
+
+        <div style="margin-top:1rem">
+          <div id="aboutSection" class="collapsible" hidden>
+            <p class="bio">Thushara is a Software Engineer by profession, having studied at the University of Westminster, UK. After several years in the tech industry, he returned to support the family business, now leading sales, regional partnerships, and online operations across Asia. With his combined technical and business background, he focuses on creating smooth digital experiences and strong customer relationships.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+  <script>
+    // --- WhatsApp Click-to-Chat: open with default message ---
+    function openWhatsApp(){
+      const WHATSAPP_NUMBER = '447710441401';
+      const pre = encodeURIComponent('Hi I would like to know more about Matara Spice Co.');
+      const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${pre}`;
+      window.open(url, '_blank', 'noopener');
+    }
+
+    // --- vCard generator (creates and downloads .vcf from page data) ---
+    function generateVCard(){
+      const fullName = 'Thushara Ranawaka';
+      const title = 'Co-Founder & Director – Business Development (Asia Region)';
+      const email = 'thushara@mataraspice.com';
+      const tel = '+6594252874';
+      const org = 'Matara Spice Co.';
+  const photo = window.location.origin + '/img/teekay.png';
+
+      const lines = [
+        'BEGIN:VCARD',
+        'VERSION:3.0',
+        `FN:${fullName}`,
+        `N:${fullName.split(' ').slice(-1)};${fullName.split(' ').slice(0,-1).join(' ')};;;`,
+        `TITLE:${title}`,
+        `ORG:${org}`,
+        `TEL;TYPE=WORK,VOICE:${tel}`,
+        `TEL;TYPE=WORK,VOICE:+817091626937`,
+        `EMAIL;TYPE=INTERNET:${email}`,
+        `PHOTO;VALUE=URI;TYPE=PNG:${photo}`,
+        'END:VCARD'
+      ];
+
+      const vcard = lines.join('\r\n');
+      const blob = new Blob([vcard], { type: 'text/vcard' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'thushara-ranawaka.vcf';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    }
+
+    document.getElementById('saveVCard')?.addEventListener('click', generateVCard);
+    // About toggle for mobile-first bio
+    (function(){
+      const btn = document.getElementById('aboutToggle');
+      const sec = document.getElementById('aboutSection');
+      if(!btn||!sec) return;
+      btn.addEventListener('click', ()=>{
+        const open = sec.classList.toggle('open');
+        if(open){ sec.removeAttribute('hidden'); btn.setAttribute('aria-expanded','true'); }
+        else { sec.setAttribute('hidden',''); btn.setAttribute('aria-expanded','false'); }
+      });
+    })();
+  </script>
+  <!-- Floating home button -->
+  <a href="index.html" class="home-fab" aria-label="Matara Spice Co. home" title="Home"></a>
+</body>
+</html>
