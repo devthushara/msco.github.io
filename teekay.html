@@ -7,7 +7,7 @@
   <meta name="description" content="Direct contact page for your nearest Matara Spice Co. representative." />
   <meta property="og:title" content="Matara Spice Co. — Your Regional Representative" />
   <meta property="og:description" content="Direct contact page for your nearest Matara Spice Co. representative." />
-  <meta property="og:image" content="/img/og-default.jpg" />
+  <meta property="og:image" content="img/og-default.jpg" />
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.0.3/src/regular/style.css">
   <link rel="icon" href="favicon/favicon.ico" />
   <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
@@ -29,7 +29,7 @@
   /* Navigation removed for profile landing page */
     html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; background:var(--bg); color:var(--ink);}
     .wrap{width:min(980px,94%);margin:0 auto;padding:2.2rem 0}
-    .card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:1.25rem;box-shadow:0 10px 28px rgba(0,0,0,.05)}
+  .card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:1.25rem;box-shadow:0 10px 28px rgba(0,0,0,.05);position:relative;overflow:hidden}
     .center{display:flex;flex-direction:column;align-items:center;text-align:center}
     h1,h2,h3{font-family:'Roca One', 'Playfair Display', Georgia, serif;margin:0}
     h1{font-size:1.25rem;color:var(--accent);letter-spacing:.06em}
@@ -81,6 +81,9 @@
       box-shadow:0 8px 20px rgba(0,0,0,.12);border:1px solid var(--line);z-index:9999;display:inline-block
     }
     .home-fab:focus{box-shadow:0 10px 28px rgba(0,0,0,.16);}
+  .card .center{position:relative;z-index:2}
+  /* subtle sticks collage: two images with opacity .3 */
+  .bg-sticks{position:absolute;right:-4%;top:-6%;width:80%;height:160%;pointer-events:none;z-index:0;opacity:.3;background-image:url('/img/sticks.webp'), url('/img/sticks.webp');background-repeat:no-repeat,no-repeat;background-size:40% 40%,24% 24%;background-position:86% 8%,72% 62%;transform:rotate(-4deg)}
   /* Collapsible about section */
   .collapsible{transition:all .28s ease;max-height:0;overflow:hidden}
   .collapsible[hidden]{display:block;}
@@ -93,14 +96,15 @@
   <!-- Navigation intentionally removed for QR landing page -->
   <main class="wrap">
   <div class="card center">
+  <div class="bg-sticks" aria-hidden="true"></div>
       <div style="max-width:420px;width:100%">
         <div class="center">
           <div class="media-row" style="gap:.9rem">
             <div class="avatar" aria-hidden="false">
-              <img src="img/teekay.png" alt="Thushara Ranawaka — Matara Spice Co. representative photo" />
+              <img src="img/teekay.webp" alt="Thushara Ranawaka — Matara Spice Co. representative photo" />
             </div>
             <a href="index.html" class="logo-inline" aria-label="Matara Spice Co. home" title="Home">
-              <img src="/img/logo_2.webp" alt="Matara Spice Co. logo" />
+              <img src="img/logo_2.webp" alt="Matara Spice Co. logo" />
             </a>
           </div>
           <h1 class="muted" style="margin-top:1rem">Your Regional Cinnamon Representative</h1>
@@ -157,7 +161,7 @@
       const email = 'thushara@mataraspice.com';
       const tel = '+6594252874';
       const org = 'Matara Spice Co.';
-  const photo = window.location.origin + '/img/teekay.png';
+  const photo = window.location.origin + 'img/teekay.webp';
 
       const lines = [
         'BEGIN:VCARD',

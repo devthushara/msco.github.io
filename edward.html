@@ -7,7 +7,7 @@
   <meta name="description" content="Direct contact page for your nearest Matara Spice Co. representative." />
   <meta property="og:title" content="Matara Spice Co. — Your Regional Representative" />
   <meta property="og:description" content="Direct contact page for your nearest Matara Spice Co. representative." />
-  <meta property="og:image" content="/img/og-default.jpg" />
+  <meta property="og:image" content="img/og-default.jpg" />
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.0.3/src/regular/style.css">
   <link rel="icon" href="favicon/favicon.ico" />
   <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
@@ -29,7 +29,7 @@
   /* Navigation removed for profile landing page */
     html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; background:var(--bg); color:var(--ink);}
     .wrap{width:min(980px,94%);margin:0 auto;padding:2.2rem 0}
-    .card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:1.25rem;box-shadow:0 10px 28px rgba(0,0,0,.05)}
+  .card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:1.25rem;box-shadow:0 10px 28px rgba(0,0,0,.05);position:relative;overflow:hidden}
     .center{display:flex;flex-direction:column;align-items:center;text-align:center}
     h1,h2,h3{font-family:'Roca One', 'Playfair Display', Georgia, serif;margin:0}
     h1{font-size:1.25rem;color:var(--accent);letter-spacing:.06em}
@@ -81,6 +81,7 @@
       box-shadow:0 8px 20px rgba(0,0,0,.12);border:1px solid var(--line);z-index:9999;display:inline-block
     }
     .home-fab:focus{box-shadow:0 10px 28px rgba(0,0,0,.16);} 
+  .card .center{position:relative;z-index:2}
   /* Collapsible about section */
   .collapsible{transition:all .28s ease;max-height:0;overflow:hidden}
   .collapsible[hidden]{display:block;}
@@ -97,7 +98,7 @@
     <div class="center">
           <div class="media-row" style="gap:.9rem">
             <div class="avatar" aria-hidden="false">
-              <img src="img/edward.png" alt="Edward Alborghetti — Matara Spice Co. representative photo" />
+              <img src="img/edward.webp" alt="Edward Alborghetti — Matara Spice Co. representative photo" />
             </div>
             <a href="index.html" class="logo-inline" aria-label="Matara Spice Co. home" title="Home">
               <img src="img/logo_2.webp" alt="Matara Spice Co. logo" />
@@ -127,7 +128,7 @@
         </div>
 
         <div style="margin-top:1.2rem;text-align:center;font-size:.9rem;color:#7a6a5a">
-          <p class="muted small">Available: Mon–Fri • 09:00–17:00 (SGT)</p>
+          <p class="muted small">Available: Mon–Fri • 09:00–17:00 (GMT)</p>
           <p class="small">For urgent wholesale requests, call or WhatsApp for fastest response.</p>
         </div>
 
@@ -156,7 +157,7 @@
       const email = 'edward@mataraspice.com';
       const tel = '+447710441401';
       const org = 'Matara Spice Co.';
-      const photo = window.location.origin + '/img/edward.png';
+  const photo = window.location.origin + 'img/edward.webp';
 
       const lines = [
         'BEGIN:VCARD',
