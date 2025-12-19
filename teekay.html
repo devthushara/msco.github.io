@@ -122,9 +122,7 @@
           </div>
           <div class="kicker" style="display:none">...contact</div>
           <div class="actions">
-            <a class="btn large" href="tel:+817091626937" aria-label="Call Thushara Ranawaka"><i class="ph ph-phone-call icon" aria-hidden="true"></i> Call (日本)</a>
             <a class="btn whatsapp large" href="https://wa.me/6594252874?text=Hi%20I%20would%20like%20to%20know%20more%20about%20Matara%20Spice%20Co." aria-label="WhatsApp Thushara Ranawaka" target="_blank" rel="noopener"><i class="ph ph-whatsapp-logo icon" aria-hidden="true"></i> WhatsApp</a>
-            <a class="btn email large" href="mailto:thushara@mataraspice.com?subject=Inquiry%20for%20Thushara%20Ranawaka" aria-label="Email Thushara Ranawaka"><i class="ph ph-envelope icon" aria-hidden="true"></i> Email</a>
             <a class="btn large" href="https://line.me/R/ti/p/%40teeekayyyyy" aria-label="LINE chat" target="_blank" rel="noopener"><i class="ph ph-chat-text icon" aria-hidden="true"></i> LINE</a>
             <!-- vCard button moved to profile header -->
           </div>
@@ -143,7 +141,7 @@
   <script>
     // --- WhatsApp Click-to-Chat: open with default message ---
     function openWhatsApp(){
-      const WHATSAPP_NUMBER = '447710441401';
+      const WHATSAPP_NUMBER = '6594252874';
       const pre = encodeURIComponent('Hi I would like to know more about Matara Spice Co.');
       const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${pre}`;
       window.open(url, '_blank', 'noopener');
@@ -153,8 +151,6 @@
     function generateVCard(){
       const fullName = 'Thushara Ranawaka';
       const title = 'Co-Founder & Director – Business Development (Asia Region)';
-      const email = 'thushara@mataraspice.com';
-      const tel = '+6594252874';
       const org = 'Matara Spice Co.';
   const photo = window.location.origin + 'img/teekay.webp';
 
@@ -165,9 +161,6 @@
         `N:${fullName.split(' ').slice(-1)};${fullName.split(' ').slice(0,-1).join(' ')};;;`,
         `TITLE:${title}`,
         `ORG:${org}`,
-        `TEL;TYPE=WORK,VOICE:${tel}`,
-        `TEL;TYPE=WORK,VOICE:+817091626937`,
-        `EMAIL;TYPE=INTERNET:${email}`,
         `PHOTO;VALUE=URI;TYPE=PNG:${photo}`,
         'END:VCARD'
       ];

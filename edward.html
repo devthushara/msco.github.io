@@ -122,9 +122,7 @@
           </div>
           <div class="kicker" style="display:none">...contact</div>
           <div class="actions">
-            <a class="btn call large" href="tel:+447710441401" aria-label="Call Edward Alborghetti"><i class="ph ph-phone-call icon" aria-hidden="true"></i> Call</a>
             <a class="btn whatsapp large" href="https://wa.me/447710441401?text=Hi%20I%20would%20like%20to%20know%20more%20about%20Matara%20Spice%20Co." aria-label="WhatsApp Edward Alborghetti" target="_blank" rel="noopener"><i class="ph ph-whatsapp-logo icon" aria-hidden="true"></i> WhatsApp</a>
-            <a class="btn email large" href="mailto:edward@mataraspice.com?subject=Inquiry%20for%20Edward%20Alborghetti" aria-label="Email Edward Alborghetti"><i class="ph ph-envelope icon" aria-hidden="true"></i> Email</a>
             <a class="btn large" href="https://line.me/R/ti/p/%40yourlineid" aria-label="LINE chat" target="_blank" rel="noopener"><i class="ph ph-chat-text icon" aria-hidden="true"></i> LINE</a>
             <!-- vCard button moved to profile header -->
           </div>
@@ -153,8 +151,6 @@
     function generateVCard(){
       const fullName = 'Edward Alborghetti';
       const title = 'Business Development Manager — Europe & Americas';
-      const email = 'edward@mataraspice.com';
-      const tel = '+447710441401';
       const org = 'Matara Spice Co.';
   const photo = window.location.origin + 'img/edward.webp';
 
@@ -165,8 +161,6 @@
         `N:${fullName.split(' ').slice(-1)};${fullName.split(' ').slice(0,-1).join(' ')};;;`,
         `TITLE:${title}`,
         `ORG:${org}`,
-        `TEL;TYPE=WORK,VOICE:${tel}`,
-        `EMAIL;TYPE=INTERNET:${email}`,
         `PHOTO;VALUE=URI;TYPE=PNG:${photo}`,
         'END:VCARD'
       ];

@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+  <title>Legal & Policies | Matara Spice Co.</title>
+  <meta name="description" content="Privacy Policy and Terms & Conditions for Matara Spice Co." />
+  <meta name="theme-color" content="#50321E" />
+  <link rel="icon" href="favicon/favicon.ico" />
+
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.0.3/src/regular/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roca+One:wght@400;700&family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* --- CORE VARIABLES (MATCHING MAIN SITE) --- */
+    :root{
+      --bg:#FAF6F0;          /* parchment */
+      --ink:#2A1C12;         /* rich brown text */
+      --accent:#9C6B3E;      /* cinnamon brown */
+      --line:#E7DFD6;        /* hairline */
+      --paper: #ffffff;
+    }
+
+    /* --- RESET & TYPOGRAPHY --- */
+    html{scroll-behavior:smooth; scroll-padding-top: 120px;}
+    *{box-sizing:border-box}
+    body{
+      margin:0; color:var(--ink); background:var(--bg);
+      font-family: 'Inter', sans-serif;
+      line-height:1.7; font-size: 16px;
+      padding-top: 92px;
+    }
+    
+    h1, h2, h3, h4 { font-family: 'Roca One', serif; margin: 0 0 1rem; color: var(--ink); }
+    h1 { font-size: clamp(2rem, 4vw, 3rem); }
+    h2 { font-size: 1.8rem; margin-top: 2.5rem; border-bottom: 2px solid var(--line); padding-bottom: 0.5rem; }
+    h3 { font-size: 1.2rem; margin-top: 1.5rem; color: var(--accent); font-weight: 600; }
+    p, li { margin-bottom: 0.8rem; opacity: 0.9; }
+    ul { padding-left: 1.2rem; }
+    li { margin-bottom: 0.4rem; }
+    strong { color: var(--ink); font-weight: 600; }
+    a { color: var(--accent); text-decoration: none; }
+
+    /* --- NAVIGATION (SAME AS HOME) --- */
+    .nav{ position:fixed; top:12px; left:0; right:0; z-index:1000; }
+    .nav-inner{
+      display:flex; align-items:center; justify-content:space-between;
+      padding: 0.65rem 1rem; width:min(1200px, 92%); margin-inline:auto;
+      border-radius: 999px;
+      background:rgba(250,246,240,0.95);
+      border:1px solid var(--line);
+      backdrop-filter:blur(12px);
+      box-shadow: 0 4px 12px rgba(156,107,62,0.08);
+    }
+    .hamburger { display: none; background:none; border:1px solid var(--line); border-radius:8px; width:44px; height:44px; cursor:pointer; flex-direction:column; justify-content:center; align-items:center; z-index:1010; }
+    .hamburger span { width:22px; height:2px; background:var(--ink); margin:3px 0; transition:0.2s; }
+    .menu { display:flex; gap:2rem; font-weight:500; font-size:0.95rem; }
+    
+    @media(max-width:850px){
+      .hamburger{display:flex}
+      .menu{ position:fixed; top:0; right:0; bottom:0; width:85%; max-width:300px; background:#fff; flex-direction:column; padding:6rem 2rem; box-shadow:-5px 0 20px rgba(0,0,0,0.1); transform:translateX(100%); transition:0.3s; z-index:1005; }
+      .menu.open{transform:translateX(0)}
+    }
+
+    /* --- LEGAL PAGE LAYOUT --- */
+    .legal-container {
+        width: min(1100px, 92%);
+        margin: 4rem auto;
+        display: grid;
+        grid-template-columns: 250px 1fr;
+        gap: 4rem;
+        align-items: start;
+    }
+
+    /* Sidebar (Table of Contents) */
+    .legal-sidebar {
+        position: sticky;
+        top: 130px;
+        background: var(--paper);
+        padding: 1.5rem;
+        border-radius: 12px;
+        border: 1px solid var(--line);
+    }
+    .legal-sidebar h4 { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; color: var(--accent); margin-bottom: 1rem; }
+    .legal-nav a {
+        display: block;
+        padding: 0.6rem 0;
+        color: var(--ink);
+        font-size: 0.95rem;
+        border-bottom: 1px solid var(--line);
+        transition: color 0.2s;
+    }
+    .legal-nav a:hover { color: var(--accent); padding-left: 5px; }
+    .legal-nav a:last-child { border-bottom: none; }
+
+    /* Main Document */
+    .legal-doc {
+        background: var(--paper);
+        padding: 3rem;
+        border-radius: 16px;
+        border: 1px solid var(--line);
+        box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+    }
+    .doc-header { text-align: center; margin-bottom: 3rem; border-bottom: 1px solid var(--line); padding-bottom: 2rem; }
+    .doc-header img { width: 80px; margin-bottom: 1rem; }
+    .last-updated { font-size: 0.9rem; color: #666; font-style: italic; }
+
+    /* Footer (Simplified) */
+    footer { background: var(--ink); color: #fff; padding: 3rem 0; text-align: center; margin-top: 4rem; }
+    footer p { color: rgba(255,255,255,0.6); font-size: 0.9rem; }
+
+    /* Responsive */
+    @media (max-width: 800px) {
+        .legal-container { grid-template-columns: 1fr; gap: 2rem; }
+        .legal-sidebar { display: none; } /* Hide sidebar on mobile, just scroll */
+        .legal-doc { padding: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="index.html" aria-label="Home">
+        <img src="img/logo_croped.webp" alt="Matara Spice Co." style="height:44px; width:auto; border-radius: 6px;">
+      </a>
+      <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+      <div class="menu" id="mainMenu">
+        <a href="index.html#products">Products</a>
+        <a href="index.html#contact">Contact</a>
+        <a href="index.html" style="color:var(--accent)">Back to Home</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="legal-container">
+    
+    <aside class="legal-sidebar">
+      <h4>Contents</h4>
+      <nav class="legal-nav">
+        <a href="#privacy">Privacy Policy</a>
+        <a href="#terms">Terms & Conditions</a>
+        <a href="#contact">Contact Information</a>
+      </nav>
+      <div style="margin-top: 2rem; font-size: 0.85rem; opacity: 0.7;">
+        <p>Matara Spice Co.<br>Malimbada, Matara<br>Sri Lanka</p>
+      </div>
+    </aside>
+
+    <main class="legal-doc">
+      
+      <div class="doc-header">
+        <img src="img/logo_croped.webp" alt="Matara Spice Co Logo">
+        <h1>Legal & Policies</h1>
+        <p class="last-updated">Last Updated: <span id="dateDisplay">December 2025</span></p>
+      </div>
+
+      <section id="privacy">
+        <h2 style="margin-top: 0;">Privacy Policy</h2>
+        <p><strong>Matara Spice Co.</strong> (“we”, “us”, “our”) respects your privacy and is committed to protecting your personal information. This Privacy Policy explains how we collect, use, store, and protect your data when you visit our website, contact us, or purchase our products.</p>
+
+        <h3>1. Information We Collect</h3>
+        <p>We may collect the following information:</p>
+        <ul>
+            <li><strong>Personal Information:</strong> Name, Email address, Phone number (including WhatsApp), Shipping and billing address, Company name (for B2B customers), and any information you provide via contact forms.</li>
+            <li><strong>Technical Information:</strong> IP address, Browser type, Device information, Pages visited and interaction data (via analytics tools).</li>
+        </ul>
+
+        <h3>2. How We Use Your Information</h3>
+        <p>We use your information to:</p>
+        <ul>
+            <li>Respond to inquiries and customer requests</li>
+            <li>Process orders and arrange shipping</li>
+            <li>Communicate about products, pricing, and availability</li>
+            <li>Provide customer support</li>
+            <li>Improve our website and services</li>
+            <li>Comply with legal and regulatory obligations</li>
+        </ul>
+        <p>We do not sell or rent your personal data to third parties.</p>
+
+        <h3>3. Communication & Marketing</h3>
+        <p>We may contact you via Email, Phone, WhatsApp or other messaging platforms.</p>
+        <p>You will only receive marketing communications if:</p>
+        <ul>
+            <li>You have requested information</li>
+            <li>You have made an inquiry or purchase</li>
+            <li>You have given consent</li>
+        </ul>
+        <p>You may opt out at any time by contacting us.</p>
+
+        <h3>4. Sharing of Information</h3>
+        <p>We may share limited information with:</p>
+        <ul>
+            <li>Logistics and courier partners (for delivery)</li>
+            <li>Payment processors (where applicable)</li>
+            <li>Legal or regulatory authorities if required by law</li>
+        </ul>
+        <p>All partners are required to handle data responsibly.</p>
+
+        <h3>5. International Data Transfers</h3>
+        <p>As we serve customers globally, your data may be processed or stored outside your country of residence, including Sri Lanka, Japan, Singapore, Australia, the UK, or other regions. We take reasonable steps to ensure data protection standards are maintained.</p>
+
+        <h3>6. Data Security</h3>
+        <p>We use appropriate technical and organizational measures to protect your information against unauthorized access, loss, misuse, disclosure, or alteration. However, no method of transmission over the internet is 100% secure.</p>
+
+        <h3>7. Your Rights</h3>
+        <p>Depending on your location (including GDPR / UK GDPR / APPI Japan), you may have the right to:</p>
+        <ul>
+            <li>Access your personal data</li>
+            <li>Request correction or deletion</li>
+            <li>Withdraw consent</li>
+            <li>Object to certain data processing</li>
+        </ul>
+        <p>Requests can be sent to: <a href="mailto:hello@mataraspice.com">hello@mataraspice.com</a></p>
+
+        <h3>8. Cookies</h3>
+        <p>Our website may use cookies to improve user experience and analyze site traffic. You can control cookies through your browser settings.</p>
+
+        <h3>9. Changes to This Policy</h3>
+        <p>We may update this Privacy Policy from time to time. Updates will be posted on this page with a revised date.</p>
+      </section>
+
+      <section id="terms" style="margin-top: 5rem;">
+        <h2>Terms & Conditions</h2>
+        <p>These Terms & Conditions govern your use of our website and services. By accessing our website or purchasing from us, you agree to these terms.</p>
+
+        <h3>1. Business Information</h3>
+        <ul>
+            <li><strong>Business Name:</strong> Matara Spice Co.</li>
+            <li><strong>Nature of Business:</strong> Production and sale of cinnamon and spice-related products</li>
+            <li><strong>Operating Regions:</strong> Sri Lanka, Japan, Asia, Europe, Australia, UK, USA</li>
+            <li><strong>Email:</strong> <a href="mailto:hello@mataraspice.com">hello@mataraspice.com</a></li>
+        </ul>
+
+        <h3>2. Products & Descriptions</h3>
+        <p>We make every effort to accurately describe our products. However:</p>
+        <ul>
+            <li>Natural products may vary slightly in color, size, aroma, or appearance.</li>
+            <li>Product images are for illustration purposes only.</li>
+        </ul>
+
+        <h3>3. Orders & Payments</h3>
+        <ul>
+            <li>Orders may be placed via website, email, WhatsApp, or other communication channels.</li>
+            <li>Prices may change without prior notice.</li>
+            <li>Payment terms will be agreed upon before order confirmation.</li>
+            <li>For B2B or bulk orders, separate agreements may apply.</li>
+        </ul>
+
+        <h3>4. Shipping & Delivery</h3>
+        <p>We ship internationally. Delivery times vary depending on destination, customs, and courier services.</p>
+        <p><strong>Customer Responsibilities:</strong> Customers are responsible for Import duties, Taxes, and Customs clearance in their country. We are not responsible for delays caused by customs or third-party logistics providers.</p>
+
+        <h3>5. Returns & Refunds</h3>
+        <p>Due to the nature of food products, returns are generally not accepted once shipped.</p>
+        <p>Refunds may be considered only if:</p>
+        <ul>
+            <li>The product is damaged during transit</li>
+            <li>The wrong product was supplied</li>
+        </ul>
+        <p>Claims must be made within 48 hours of delivery, with photo evidence.</p>
+
+        <h3>6. Use of Website</h3>
+        <p>You agree not to misuse the website, attempt unauthorized access, or copy/reproduce content without permission. All content, logos, images, and text are the intellectual property of Matara Spice Co.</p>
+
+        <h3>7. Health & Usage Disclaimer</h3>
+        <p>Our products are food and culinary ingredients. Any health-related information provided is for general informational purposes only, is not medical advice, and should not replace professional medical consultation.</p>
+
+        <h3>8. Limitation of Liability</h3>
+        <p>To the fullest extent permitted by law, Matara Spice Co. shall not be liable for indirect or consequential losses. Liability is limited to the value of the purchased product.</p>
+
+        <h3>9. Governing Law</h3>
+        <p>Unless otherwise agreed, this agreement is governed by the laws of Sri Lanka. International customers agree that disputes will be handled under applicable Sri Lankan law or mutually agreed jurisdiction.</p>
+
+        <h3>10. Changes to Terms</h3>
+        <p>We reserve the right to update these Terms & Conditions at any time. Continued use of the website constitutes acceptance of the updated terms.</p>
+      </section>
+
+      <section id="contact" style="margin-top: 4rem; padding-top: 2rem; border-top: 1px dashed var(--line);">
+        <h3>Contact Us</h3>
+        <p>For privacy-related questions or inquiries regarding these terms, please contact us:</p>
+        <p><strong>Email:</strong> <a href="mailto:hello@mataraspice.com">hello@mataraspice.com</a></p>
+      </section>
+
+    </main>
+  </div>
+
+  <footer>
+    <div class="wrap">
+       <img src="img/footer_logo.webp" alt="Footer Logo" style="width:80px; margin:0 auto 1rem; border-radius:12px; background:#fff; padding:5px;">
+       <p>© <span id="year"></span> Matara Spice Co. All rights reserved.</p>
+       <p style="font-size: 0.8rem; margin-top:0.5rem;"><a href="index.html" style="color:rgba(255,255,255,0.7)">Back to Home</a></p>
+    </div>
+  </footer>
+
+  <script>
+    // Set Date
+    const d = new Date();
+    document.getElementById('year').textContent = d.getFullYear();
+    document.getElementById('dateDisplay').textContent = d.toLocaleString('default', { month: 'long', year: 'numeric' });
+
+    // Mobile Menu
+    const hamburger = document.getElementById('hamburger');
+    const menu = document.getElementById('mainMenu');
+    if(hamburger){
+        hamburger.addEventListener('click', () => {
+            menu.classList.toggle('open');
+        });
+    }
+  </script>
+</body>
+</html>

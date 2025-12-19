@@ -266,6 +266,45 @@
       gap: 10px;
     }
 
+    /* WhatsApp contact button (kept visible in print) */
+    .contact-wa {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 99px;
+      cursor: pointer;
+      font-weight: 600;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      text-decoration: none;
+    }
+
+    /* Mobile responsiveness */
+    @media (max-width: 720px) {
+      body { padding: 10px; }
+      .print-controls {
+        position: static;
+        margin: 10px auto 12px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+      .invoice-container {
+        padding: 16px;
+        border-radius: 10px;
+      }
+      header {
+        flex-direction: column;
+        gap: 12px;
+        align-items: flex-start;
+      }
+      .invoice-meta { text-align: left; width: 100%; }
+      .meta-grid { grid-template-columns: auto 1fr; }
+    }
+
     /* --- PRINT STYLES --- */
     @media print {
       body {
@@ -373,8 +412,11 @@
         <h3>Seller (Exporter)</h3>
         <strong>Matara Spice Co.</strong>
         <p>Malimbada, Matara, Sri Lanka</p>
-        <p><i class="ph ph-envelope"></i> hello@mataraspice.com</p>
-        <p><i class="ph ph-whatsapp-logo"></i> +65 9425 2874</p>
+        <p>
+          <a class="contact-wa" href="https://wa.me/6594252874?text=Hi%20Matara%20Spice%20Co.%20I%20have%20a%20question%20about%20this%20invoice." target="_blank" rel="noopener">
+            <i class="ph ph-whatsapp-logo"></i> Reach us on WhatsApp
+          </a>
+        </p>
         <p><i class="ph ph-globe"></i> www.mataraspice.com</p>
       </div>
       

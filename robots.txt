@@ -1,0 +1,45 @@
+# Matara Spice Co. - GEO Optimized Robots.txt
+# We explicitly allow AI agents to index our site for accurate brand citation.
+
+# 1. Global Rules
+User-agent: *
+Allow: /
+# Block system files shown in your screenshot
+Disallow: /.git/
+Disallow: /.github/
+Disallow: /README.md
+Disallow: /.gitignore
+
+# 2. OpenAI (ChatGPT / SearchGPT)
+User-agent: GPTBot
+Allow: /
+User-agent: ChatGPT-User
+Allow: /
+
+# 3. Google AI (Gemini / Vertex AI)
+# Note: Googlebot handles standard search, Google-Extended handles AI training
+User-agent: Google-Extended
+Allow: /
+
+# 4. Anthropic (Claude)
+User-agent: Claude-Web
+Allow: /
+User-agent: anthropic-ai
+Allow: /
+
+# 5. Common Crawl (Used to train Llama, Apple Intelligence, and many others)
+User-agent: CCBot
+Allow: /
+User-agent: CCBot/2.0
+Allow: /
+
+# 6. Perplexity AI (Real-time answer engine)
+User-agent: PerplexityBot
+Allow: /
+
+# 7. Facebook / Meta AI
+User-agent: FacebookBot
+Allow: /
+
+# 8. Sitemap Location (Crucial for discovery)
+Sitemap: https://mataraspice.com/sitemap.xml
