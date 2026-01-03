@@ -1,0 +1,1227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quotation Generator - Matara Spice Co.</title>
+  <meta name="robots" content="noindex,nofollow" />
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.0.3/src/regular/style.css">
+
+  <style>
+    :root {
+      --bg: #FAF6F0;
+      --ink: #2A1C12;
+      --accent: #9C6B3E;
+      --accent-light: #C08B5A;
+      --line: #E7DFD6;
+      --white: #ffffff;
+      --sidebar-width: 380px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      overflow-x: hidden;
+    }
+
+    /* === SIDEBAR === */
+    .sidebar {
+      position: fixed;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: var(--sidebar-width);
+      background: var(--white);
+      border-right: 2px solid var(--line);
+      overflow-y: auto;
+      padding: 20px;
+      z-index: 100;
+      box-shadow: 2px 0 10px rgba(0,0,0,0.05);
+    }
+
+    .sidebar h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 24px;
+      color: var(--accent);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .sidebar-section {
+      margin-bottom: 25px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .sidebar-section:last-child { border-bottom: none; }
+
+    .sidebar-section h3 {
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--accent);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .form-group {
+      margin-bottom: 12px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      margin-bottom: 4px;
+      color: var(--ink);
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 8px 10px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      font-family: inherit;
+      font-size: 13px;
+      background: #FFFBF5;
+      transition: all 0.2s;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: var(--accent);
+      background: var(--white);
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 60px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .btn {
+      background: var(--accent);
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 13px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+      width: 100%;
+      justify-content: center;
+    }
+
+    .btn:hover {
+      background: var(--ink);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+    }
+
+    .btn-secondary:hover {
+      background: var(--accent-light);
+      color: white;
+      border-color: var(--accent-light);
+    }
+
+    .btn-danger {
+      background: #dc3545;
+    }
+
+    .btn-danger:hover {
+      background: #c82333;
+    }
+
+    .btn-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    /* Item List in Sidebar */
+    .item-list {
+      margin-top: 10px;
+    }
+
+    .item-card {
+      background: #FFFBF5;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px;
+      margin-bottom: 10px;
+    }
+
+    .item-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 8px;
+    }
+
+    .item-card-title {
+      font-weight: 600;
+      font-size: 13px;
+      flex: 1;
+    }
+
+    .item-delete {
+      background: transparent;
+      border: none;
+      color: #dc3545;
+      cursor: pointer;
+      font-size: 18px;
+      padding: 0;
+    }
+
+    .item-details {
+      font-size: 11px;
+      color: #666;
+      line-height: 1.5;
+    }
+
+    /* === PREVIEW AREA === */
+    .preview-area {
+      margin-left: var(--sidebar-width);
+      padding: 30px;
+      min-height: 100vh;
+    }
+
+    .preview-controls {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 20px;
+      justify-content: flex-end;
+    }
+
+    .preview-controls .btn {
+      width: auto;
+    }
+
+    /* Invoice Document */
+    .document {
+      max-width: 210mm;
+      min-height: auto;
+      margin: 0 auto;
+      background: var(--white);
+      padding: 25px;
+      box-shadow: 0 5px 30px rgba(0,0,0,0.1);
+      border-radius: 8px;
+    }
+
+    /* Header */
+    .doc-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      border-bottom: 3px solid var(--accent);
+      padding-bottom: 15px;
+      margin-bottom: 20px;
+      page-break-after: avoid;
+    }
+
+    .brand-logo img {
+      width: 120px;
+      height: auto;
+      margin-bottom: 8px;
+      border-radius: 8px;
+    }
+
+    .brand-logo h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 26px;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+
+    .brand-logo p {
+      font-size: 12px;
+      line-height: 1.5;
+      margin: 2px 0;
+    }
+
+    .doc-meta {
+      text-align: right;
+    }
+
+    .doc-meta h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 32px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 15px;
+      color: var(--accent);
+    }
+
+    .meta-table {
+      font-size: 13px;
+    }
+
+    .meta-table tr td:first-child {
+      font-weight: 600;
+      color: var(--accent);
+      padding-right: 15px;
+      text-align: right;
+    }
+
+    .meta-table tr td:last-child {
+      text-align: right;
+    }
+
+    /* Addresses */
+    .address-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 20px;
+      page-break-inside: avoid;
+    }
+
+    .address-box h3 {
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--accent);
+      border-bottom: 2px solid var(--line);
+      padding-bottom: 8px;
+      margin-bottom: 12px;
+    }
+
+    .address-box p {
+      margin: 4px 0;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    /* Table */
+    .items-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+      page-break-inside: auto;
+    }
+
+    .items-table thead {
+      page-break-inside: avoid;
+      page-break-after: avoid;
+    }
+
+    .items-table thead th {
+      background: var(--accent);
+      color: white;
+      text-align: left;
+      padding: 10px 8px;
+      font-weight: 600;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .items-table tbody tr {
+      page-break-inside: avoid;
+      page-break-after: auto;
+    }
+
+    .items-table tbody td {
+      padding: 10px 8px;
+      border-bottom: 1px solid var(--line);
+      font-size: 12px;
+      vertical-align: top;
+    }
+
+    .items-table .col-qty,
+    .items-table .col-price,
+    .items-table .col-total {
+      text-align: right;
+    }
+
+    .items-table tfoot td {
+      padding: 12px 10px;
+      font-weight: 700;
+      font-size: 15px;
+      color: var(--accent);
+      background: var(--bg);
+    }
+
+    .items-table tfoot {
+      page-break-inside: avoid;
+    }
+
+    /* Terms & Footer */
+    .terms-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 20px;
+      page-break-inside: avoid;
+    }
+
+    .term-box h4 {
+      font-size: 12px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .term-box p {
+      font-size: 11px;
+      line-height: 1.5;
+      margin: 3px 0;
+      white-space: pre-line;
+    }
+
+    .footer-section {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 20px;
+      margin-top: 20px;
+      page-break-inside: avoid;
+    }
+
+    .bank-details {
+      background: var(--bg);
+      padding: 15px;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+    }
+
+    .bank-details h4 {
+      font-size: 12px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+
+    .bank-row {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 5px;
+      font-size: 11px;
+    }
+
+    .bank-label {
+      font-weight: 600;
+      min-width: 90px;
+    }
+
+    .signature-box {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
+    .sign-line {
+      width: 100%;
+      border-bottom: 2px solid var(--ink);
+      margin-bottom: 12px;
+      height: 50px;
+    }
+
+    .signature-box strong {
+      font-size: 13px;
+      margin-bottom: 3px;
+    }
+
+    .signature-box span {
+      font-size: 11px;
+      color: #666;
+    }
+
+    .footer-note {
+      margin-top: 15px;
+      padding-top: 12px;
+      border-top: 1px solid var(--line);
+      font-size: 10px;
+      color: #888;
+      text-align: center;
+      line-height: 1.5;
+      page-break-inside: avoid;
+    }
+
+    /* Mobile Responsiveness */
+    @media (max-width: 1024px) {
+      .sidebar {
+        width: 100%;
+        position: relative;
+        border-right: none;
+        border-bottom: 2px solid var(--line);
+      }
+      
+      .preview-area {
+        margin-left: 0;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .address-section,
+      .terms-section,
+      .footer-section {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Print Styles */
+    @media print {
+      body { background: white; }
+      .sidebar,
+      .preview-controls { display: none !important; }
+      .preview-area {
+        margin-left: 0;
+        padding: 0;
+      }
+      .document {
+        box-shadow: none;
+        padding: 0;
+        max-width: 100%;
+        margin: 0;
+      }
+      .doc-header {
+        page-break-after: avoid;
+      }
+      .address-section {
+        page-break-inside: avoid;
+        page-break-after: avoid;
+      }
+      .items-table {
+        page-break-inside: auto;
+      }
+      .items-table thead {
+        display: table-header-group;
+        page-break-inside: avoid;
+        page-break-after: avoid;
+      }
+      .items-table tbody tr {
+        page-break-inside: avoid;
+        page-break-after: auto;
+      }
+      .items-table tfoot {
+        display: table-footer-group;
+        page-break-inside: avoid;
+      }
+      .terms-section {
+        page-break-inside: avoid;
+      }
+      .footer-section {
+        page-break-inside: avoid;
+      }
+      .footer-note {
+        page-break-inside: avoid;
+      }
+      @page {
+        size: A4;
+        margin: 12mm;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <h1><i class="ph ph-file-text"></i> Proforma Invoice Builder</h1>
+    <p style="font-size: 12px; margin-bottom: 25px; color: #666;">Configure your proforma invoice using the form below. Changes update in real-time.</p>
+
+    <!-- Document Info -->
+    <div class="sidebar-section">
+      <h3><i class="ph ph-info"></i> Document Info</h3>
+      <div class="form-group">
+        <label>Proforma Invoice Number</label>
+        <input type="text" id="quoteNo" placeholder="MSC/PI/2026/00000001">
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Date</label>
+          <input type="date" id="quoteDate">
+        </div>
+        <div class="form-group">
+          <label>Valid (Days)</label>
+          <input type="number" id="validDays" value="7" min="1">
+        </div>
+      </div>
+    </div>
+
+    <!-- Currency & Exchange -->
+    <div class="sidebar-section">
+      <h3><i class="ph ph-currency-dollar"></i> Currency Settings</h3>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Currency</label>
+          <select id="currency">
+            <option value="USD">USD ($)</option>
+            <option value="EUR">EUR (€)</option>
+            <option value="GBP">GBP (£)</option>
+            <option value="LKR">LKR (Rs)</option>
+            <option value="AUD">AUD ($)</option>
+            <option value="JPY">JPY (¥)</option>
+            <option value="SGD">SGD ($)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Exchange Rate</label>
+          <input type="number" id="exchangeRate" value="1.00" step="0.01" min="0">
+        </div>
+      </div>
+    </div>
+
+    <!-- Buyer Details -->
+    <div class="sidebar-section">
+      <h3><i class="ph ph-user"></i> Buyer Details</h3>
+      <div class="form-group">
+        <label>Company Name</label>
+        <input type="text" id="buyerName" placeholder="Client Company Name">
+      </div>
+      <div class="form-group">
+        <label>Address</label>
+        <textarea id="buyerAddress" placeholder="Full address, contact details, tax numbers"></textarea>
+      </div>
+    </div>
+
+    <!-- Seller/Exporter Details -->
+    <div class="sidebar-section">
+      <h3><i class="ph ph-building"></i> Seller Details (From)</h3>
+      <div class="form-group">
+        <label>Company Name</label>
+        <input type="text" id="sellerName" value="Matara Spice Co.">
+      </div>
+      <div class="form-group">
+        <label>Address</label>
+        <textarea id="sellerAddress" rows="2">Malimbada, Matara, Sri Lanka</textarea>
+      </div>
+      <div class="form-group">
+        <label>Website</label>
+        <input type="text" id="sellerWebsite" value="www.mataraspice.com">
+      </div>
+      <div class="form-group">
+        <label>Phone/WhatsApp</label>
+        <input type="text" id="sellerPhone" value="+65 9425 2874">
+      </div>
+      <div class="form-group">
+        <label>Registration No</label>
+        <input type="text" id="sellerRegNo" value="251023325405">
+      </div>
+    </div>
+
+    <!-- Items -->
+    <div class="sidebar-section">
+      <h3><i class="ph ph-package"></i> Line Items</h3>
+      <div class="item-list" id="itemList"></div>
+      <button class="btn" onclick="addItem()"><i class="ph ph-plus"></i> Add Item</button>
+    </div>
+
+    <!-- Shipping Terms -->
+    <div class="sidebar-section">
+      <h3><i class="ph ph-truck"></i> Shipping Terms</h3>
+      <div class="form-group">
+        <label>Incoterm</label>
+        <input type="text" id="incoterm" placeholder="FOB, CIF, CNF, etc.">
+      </div>
+      <div class="form-group">
+        <label>Port of Loading</label>
+        <input type="text" id="portLoad" placeholder="e.g., Colombo, Sri Lanka">
+      </div>
+      <div class="form-group">
+        <label>Port of Destination</label>
+        <input type="text" id="portDest" placeholder="Destination port">
+      </div>
+    </div>
+
+    <!-- Packaging & Certifications -->
+    <div class="sidebar-section">
+      <h3><i class="ph ph-package"></i> Packaging & Certifications</h3>
+      <div class="form-group">
+        <label>Packaging Details</label>
+        <textarea id="packagingDetails" rows="4">• 1 kg food-grade poly packs
+• 25 kg per master carton
+• Export corrugated cartons
+• Full labeling included</textarea>
+      </div>
+      <div class="form-group">
+        <label>Certifications</label>
+        <textarea id="certificationsDetails" rows="4">• Phytosanitary Certificate
+• Certificate of Origin
+• Quality Certificate
+• Fumigation (if requested)</textarea>
+      </div>
+    </div>
+
+    <!-- Bank Selection -->
+    <div class="sidebar-section">
+      <h3><i class="ph ph-bank"></i> Bank Details</h3>
+      <div class="form-group">
+        <label>Select Bank</label>
+        <select id="bankSelector">
+          <option value="HNB">HNB - Sri Lanka</option>
+          <option value="DBS">DBS - Singapore</option>
+          <option value="JPPost">JP Post Bank - Japan</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="btn-group">
+      <button class="btn" onclick="window.print()"><i class="ph ph-printer"></i> Print/PDF</button>
+      <button class="btn btn-secondary" onclick="saveData()"><i class="ph ph-floppy-disk"></i> Save</button>
+    </div>
+  </div>
+
+  <!-- PREVIEW AREA -->
+  <div class="preview-area">
+    <div class="preview-controls">
+      <button class="btn" onclick="window.print()"><i class="ph ph-printer"></i> Print / Save PDF</button>
+      <a href="invoice.html" class="btn btn-secondary"><i class="ph ph-file-text"></i> Create Invoice</a>
+    </div>
+
+    <!-- DOCUMENT -->
+    <div class="document">
+      <!-- Header -->
+      <div class="doc-header">
+        <div class="brand-logo">
+          <img src="img/logo_croped.webp" alt="Matara Spice Co." onerror="this.style.display='none'">
+          <h2 id="displaySellerNameHeader">Matara Spice Co.</h2>
+          <p>Authentic Ceylon Cinnamon</p>
+          <p id="displaySellerAddressHeader">Malimbada, Matara, Sri Lanka</p>
+          <p>Reg No: <span id="displaySellerRegNo">251023325405</span></p>
+        </div>
+
+        <div class="doc-meta">
+          <h2>PROFORMA INVOICE</h2>
+          <table class="meta-table">
+            <tr>
+              <td>PI No:</td>
+              <td id="displayQuoteNo">-</td>
+            </tr>
+            <tr>
+              <td>Date:</td>
+              <td id="displayDate">-</td>
+            </tr>
+            <tr>
+              <td>Valid Until:</td>
+              <td id="displayValidUntil">-</td>
+            </tr>
+            <tr>
+              <td>Currency:</td>
+              <td id="displayCurrency">USD</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <!-- Addresses -->
+      <div class="address-section">
+        <div class="address-box">
+          <h3>From (Exporter)</h3>
+          <p><strong id="displaySellerName">Matara Spice Co.</strong></p>
+          <p id="displaySellerAddress">Malimbada, Matara, Sri Lanka</p>
+          <p><i class="ph ph-globe"></i> <span id="displaySellerWebsite">www.mataraspice.com</span></p>
+          <p><i class="ph ph-whatsapp-logo"></i> <span id="displaySellerPhone">+65 9425 2874</span></p>
+        </div>
+        
+        <div class="address-box">
+          <h3>To (Buyer)</h3>
+          <div id="displayBuyer">
+            <p style="color: #999; font-style: italic;">No buyer details provided</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Items Table -->
+      <table class="items-table">
+        <thead>
+          <tr>
+            <th style="width: 35%;">Description</th>
+            <th style="width: 12%;">Grade</th>
+            <th style="width: 12%;">Cut</th>
+            <th style="width: 12%;">Pack</th>
+            <th class="col-qty" style="width: 10%;">Qty (kg)</th>
+            <th class="col-price" style="width: 12%;">Unit Price</th>
+            <th class="col-total" style="width: 12%;">Total</th>
+          </tr>
+        </thead>
+        <tbody id="displayItems">
+          <tr>
+            <td colspan="7" style="text-align: center; color: #999; font-style: italic;">No items added yet</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="6" style="text-align: right;">Grand Total:</td>
+            <td style="text-align: right;" id="displayTotal">0.00</td>
+          </tr>
+        </tfoot>
+      </table>
+
+      <!-- Terms -->
+      <div class="terms-section">
+        <div>
+          <div class="term-box">
+            <h4><i class="ph ph-package"></i> Packaging Details</h4>
+            <p id="displayPackaging">• 1 kg food-grade poly packs
+• 25 kg per master carton
+• Export corrugated cartons
+• Full labeling included</p>
+          </div>
+          
+          <div class="term-box" style="margin-top: 20px;">
+            <h4><i class="ph ph-certificate"></i> Certifications</h4>
+            <p id="displayCertifications">• Phytosanitary Certificate
+• Certificate of Origin
+• Quality Certificate
+• Fumigation (if requested)</p>
+          </div>
+        </div>
+
+        <div>
+          <div class="term-box">
+            <h4><i class="ph ph-truck"></i> Shipping Terms</h4>
+            <p><strong>Incoterm:</strong> <span id="displayIncoterm">-</span>
+<strong>Port of Loading:</strong> <span id="displayPortLoad">-</span>
+<strong>Destination:</strong> <span id="displayPortDest">-</span></p>
+          </div>
+
+          <div class="term-box" style="margin-top: 20px;">
+            <h4><i class="ph ph-money"></i> Payment Terms</h4>
+            <p><strong>Preferred:</strong> Letter of Credit (LC)
+<strong>Alternative:</strong> 50% Advance / 50% Before Shipment</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div class="footer-section">
+        <div class="bank-details">
+          <h4><i class="ph ph-bank"></i> Bank Details</h4>
+          <div class="bank-row">
+            <span class="bank-label">Bank Name:</span>
+            <span id="displayBankName">-</span>
+          </div>
+          <div class="bank-row">
+            <span class="bank-label">Account Name:</span>
+            <span id="displayBankAccName">-</span>
+          </div>
+          <div class="bank-row">
+            <span class="bank-label">Account No:</span>
+            <span id="displayBankAccNo">-</span>
+          </div>
+          <div class="bank-row">
+            <span class="bank-label">Branch:</span>
+            <span id="displayBankBranch">-</span>
+          </div>
+          <div class="bank-row">
+            <span class="bank-label">SWIFT/BIC:</span>
+            <span id="displayBankSwift">-</span>
+          </div>
+        </div>
+
+        <div class="signature-box">
+          <div class="sign-line"></div>
+          <strong>Thushara Ranawaka</strong>
+          <span>Director - International Operations</span>
+          <span>Matara Spice Co., Sri Lanka</span>
+        </div>
+      </div>
+
+      <div class="footer-note">
+        <p>This proforma invoice is not a binding contract. Order confirmation required. Prices valid for <span id="displayValidDaysFooter">7</span> days and may vary based on market rates. Final invoice will reflect exact packed weight.</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Data Storage
+    let items = [];
+    let itemIdCounter = 1;
+
+    const currencySymbols = {
+      'USD': '$', 'EUR': '€', 'GBP': '£', 'LKR': 'Rs',
+      'AUD': '$', 'JPY': '¥', 'SGD': '$'
+    };
+
+    const bankData = {
+      'HNB': {
+        name: 'Hatton National Bank PLC',
+        accName: 'Ratk Ranawaka',
+        accNo: '042020474661',
+        branch: 'Matara Branch (Code: 042)',
+        swift: 'HBLILKLX'
+      },
+      'DBS': {
+        name: 'DBS Bank',
+        accName: 'RATK Ranawaka',
+        accNo: '0060224539',
+        branch: 'Singapore',
+        swift: 'DBSSSGSG'
+      },
+      'JPPost': {
+        name: 'Japan Post Bank (ゆうちょ銀行)',
+        accName: 'RATK Ranawaka',
+        accNo: '12060-22343621',
+        branch: '3-1, Otemachi 2-chome, Chiyoda-ku, Tokyo 100-8793, Japan',
+        swift: 'JPPSJPJ2'
+      }
+    };
+
+    // Initialize
+    function init() {
+      // Set today's date
+      const today = new Date().toISOString().split('T')[0];
+      document.getElementById('quoteDate').value = today;
+
+      // Auto-generate proforma invoice number
+      const year = new Date().getFullYear();
+      const num = String(Math.floor(Math.random() * 99999999) + 1).padStart(8, '0');
+      document.getElementById('quoteNo').value = `MSC/PI/${year}/${num}`;
+
+      // Add event listeners
+      document.getElementById('quoteNo').addEventListener('input', updatePreview);
+      document.getElementById('quoteDate').addEventListener('change', updatePreview);
+      document.getElementById('validDays').addEventListener('input', updatePreview);
+      document.getElementById('currency').addEventListener('change', updatePreview);
+      document.getElementById('exchangeRate').addEventListener('input', updatePreview);
+      document.getElementById('buyerName').addEventListener('input', updatePreview);
+      document.getElementById('buyerAddress').addEventListener('input', updatePreview);
+      document.getElementById('sellerName').addEventListener('input', updatePreview);
+      document.getElementById('sellerAddress').addEventListener('input', updatePreview);
+      document.getElementById('sellerWebsite').addEventListener('input', updatePreview);
+      document.getElementById('sellerPhone').addEventListener('input', updatePreview);
+      document.getElementById('sellerRegNo').addEventListener('input', updatePreview);
+      document.getElementById('incoterm').addEventListener('input', updatePreview);
+      document.getElementById('portLoad').addEventListener('input', updatePreview);
+      document.getElementById('portDest').addEventListener('input', updatePreview);
+      document.getElementById('packagingDetails').addEventListener('input', updatePreview);
+      document.getElementById('certificationsDetails').addEventListener('input', updatePreview);
+      document.getElementById('bankSelector').addEventListener('change', updatePreview);
+
+      // Setup auto bullet points for packaging and certifications
+      setupAutoBullets('packagingDetails');
+      setupAutoBullets('certificationsDetails');
+
+      // Load saved data
+      loadData();
+      
+      // Initial render
+      updatePreview();
+    }
+
+    // Auto Bullet Point Generation
+    function setupAutoBullets(textareaId) {
+      const textarea = document.getElementById(textareaId);
+      if (!textarea) return;
+
+      textarea.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          const cursorPos = this.selectionStart;
+          const textBefore = this.value.substring(0, cursorPos);
+          const textAfter = this.value.substring(cursorPos);
+          
+          // Add new line with bullet
+          this.value = textBefore + '\n• ' + textAfter;
+          
+          // Move cursor after the bullet
+          this.selectionStart = this.selectionEnd = cursorPos + 3;
+          
+          // Trigger update
+          updatePreview();
+        }
+      });
+    }
+
+    // Add Item
+    function addItem() {
+      const item = {
+        id: itemIdCounter++,
+        description: 'Ceylon Cinnamon',
+        grade: '',
+        cut: '',
+        pack: '',
+        qty: 0,
+        price: 0
+      };
+      items.push(item);
+      renderItems();
+      updatePreview();
+    }
+
+    // Delete Item
+    function deleteItem(id) {
+      if (items.length === 1) {
+        alert('You must have at least one item');
+        return;
+      }
+      items = items.filter(item => item.id !== id);
+      renderItems();
+      updatePreview();
+    }
+
+    // Render Items in Sidebar
+    function renderItems() {
+      const container = document.getElementById('itemList');
+      if (items.length === 0) {
+        container.innerHTML = '<p style="color: #999; font-size: 12px; text-align: center;">No items added yet</p>';
+        return;
+      }
+
+      container.innerHTML = items.map(item => `
+        <div class="item-card">
+          <div class="item-card-header">
+            <div class="item-card-title">${item.description || 'Untitled Item'}</div>
+            <button class="item-delete" onclick="deleteItem(${item.id})">
+              <i class="ph ph-trash"></i>
+            </button>
+          </div>
+          <div class="form-group">
+            <input type="text" placeholder="Description" value="${item.description}" 
+              onchange="updateItemField(${item.id}, 'description', this.value)">
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <input type="text" placeholder="Grade" value="${item.grade}" 
+                onchange="updateItemField(${item.id}, 'grade', this.value)">
+            </div>
+            <div class="form-group">
+              <input type="text" placeholder="Cut" value="${item.cut}" 
+                onchange="updateItemField(${item.id}, 'cut', this.value)">
+            </div>
+          </div>
+          <div class="form-group">
+            <input type="text" placeholder="Packaging" value="${item.pack}" 
+              onchange="updateItemField(${item.id}, 'pack', this.value)">
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <input type="number" placeholder="Qty (kg)" value="${item.qty}" step="0.01"
+                onchange="updateItemField(${item.id}, 'qty', parseFloat(this.value) || 0)">
+            </div>
+            <div class="form-group">
+              <input type="number" placeholder="Unit Price" value="${item.price}" step="0.01"
+                onchange="updateItemField(${item.id}, 'price', parseFloat(this.value) || 0)">
+            </div>
+          </div>
+          <div class="item-details">
+            Subtotal: <strong>$${(item.qty * item.price).toFixed(2)}</strong>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Update Item Field
+    function updateItemField(id, field, value) {
+      const item = items.find(i => i.id === id);
+      if (item) {
+        item[field] = value;
+        renderItems();
+        updatePreview();
+      }
+    }
+
+    // Update Preview
+    function updatePreview() {
+      // Quote Info
+      const quoteNo = document.getElementById('quoteNo').value || '-';
+      const quoteDate = document.getElementById('quoteDate').value;
+      const validDays = parseInt(document.getElementById('validDays').value) || 7;
+      
+      document.getElementById('displayQuoteNo').textContent = quoteNo;
+      document.getElementById('displayDate').textContent = quoteDate ? 
+        new Date(quoteDate).toLocaleDateString('en-GB') : '-';
+
+      // Calculate valid until date
+      if (quoteDate) {
+        const validDate = new Date(quoteDate);
+        validDate.setDate(validDate.getDate() + validDays);
+        document.getElementById('displayValidUntil').textContent = 
+          validDate.toLocaleDateString('en-GB');
+      } else {
+        document.getElementById('displayValidUntil').textContent = '-';
+      }
+      document.getElementById('displayValidDaysFooter').textContent = validDays;
+
+      // Currency
+      const currency = document.getElementById('currency').value;
+      const symbol = currencySymbols[currency];
+      document.getElementById('displayCurrency').textContent = currency;
+
+      // Buyer
+      const buyerName = document.getElementById('buyerName').value;
+      const buyerAddress = document.getElementById('buyerAddress').value;
+      const buyerDiv = document.getElementById('displayBuyer');
+      
+      if (buyerName || buyerAddress) {
+        buyerDiv.innerHTML = `
+          ${buyerName ? `<p><strong>${buyerName}</strong></p>` : ''}
+          ${buyerAddress ? `<p style="white-space: pre-line;">${buyerAddress}</p>` : ''}
+        `;
+      } else {
+        buyerDiv.innerHTML = '<p style="color: #999; font-style: italic;">No buyer details provided</p>';
+      }
+
+      // Seller
+      const sellerName = document.getElementById('sellerName').value || 'Matara Spice Co.';
+      const sellerAddress = document.getElementById('sellerAddress').value || 'Malimbada, Matara, Sri Lanka';
+      const sellerWebsite = document.getElementById('sellerWebsite').value || 'www.mataraspice.com';
+      const sellerPhone = document.getElementById('sellerPhone').value || '+65 9425 2874';
+      const sellerRegNo = document.getElementById('sellerRegNo').value || '251023325405';
+
+      document.getElementById('displaySellerName').textContent = sellerName;
+      document.getElementById('displaySellerNameHeader').textContent = sellerName;
+      document.getElementById('displaySellerAddress').textContent = sellerAddress;
+      document.getElementById('displaySellerAddressHeader').textContent = sellerAddress;
+      document.getElementById('displaySellerWebsite').textContent = sellerWebsite;
+      document.getElementById('displaySellerPhone').textContent = sellerPhone;
+      document.getElementById('displaySellerRegNo').textContent = sellerRegNo;
+
+      // Items Table
+      const tbody = document.getElementById('displayItems');
+      const exchangeRate = parseFloat(document.getElementById('exchangeRate').value) || 1;
+      
+      if (items.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; color: #999; font-style: italic;">No items added yet</td></tr>';
+        document.getElementById('displayTotal').textContent = '0.00';
+      } else {
+        let total = 0;
+        tbody.innerHTML = items.map(item => {
+          const itemTotal = item.qty * item.price;
+          total += itemTotal;
+          return `
+            <tr>
+              <td>${item.description || '-'}</td>
+              <td>${item.grade || '-'}</td>
+              <td>${item.cut || '-'}</td>
+              <td>${item.pack || '-'}</td>
+              <td class="col-qty">${item.qty.toFixed(2)}</td>
+              <td class="col-price">${symbol}${item.price.toFixed(2)}</td>
+              <td class="col-total">${symbol}${itemTotal.toFixed(2)}</td>
+            </tr>
+          `;
+        }).join('');
+
+        const convertedTotal = total * exchangeRate;
+        document.getElementById('displayTotal').textContent = 
+          `${symbol}${convertedTotal.toFixed(2)}`;
+      }
+
+      // Shipping
+      document.getElementById('displayIncoterm').textContent = 
+        document.getElementById('incoterm').value || '-';
+      document.getElementById('displayPortLoad').textContent = 
+        document.getElementById('portLoad').value || '-';
+      document.getElementById('displayPortDest').textContent = 
+        document.getElementById('portDest').value || '-';
+
+      // Packaging & Certifications
+      document.getElementById('displayPackaging').textContent = 
+        document.getElementById('packagingDetails').value || '-';
+      document.getElementById('displayCertifications').textContent = 
+        document.getElementById('certificationsDetails').value || '-';
+
+      // Bank Details
+      const bank = bankData[document.getElementById('bankSelector').value];
+      document.getElementById('displayBankName').textContent = bank.name;
+      document.getElementById('displayBankAccName').textContent = bank.accName;
+      document.getElementById('displayBankAccNo').textContent = bank.accNo;
+      document.getElementById('displayBankBranch').textContent = bank.branch;
+      document.getElementById('displayBankSwift').textContent = bank.swift;
+    }
+
+    // Save/Load Data
+    function saveData() {
+      const data = {
+        quoteNo: document.getElementById('quoteNo').value,
+        quoteDate: document.getElementById('quoteDate').value,
+        validDays: document.getElementById('validDays').value,
+        currency: document.getElementById('currency').value,
+        exchangeRate: document.getElementById('exchangeRate').value,
+        buyerName: document.getElementById('buyerName').value,
+        buyerAddress: document.getElementById('buyerAddress').value,
+        sellerName: document.getElementById('sellerName').value,
+        sellerAddress: document.getElementById('sellerAddress').value,
+        sellerWebsite: document.getElementById('sellerWebsite').value,
+        sellerPhone: document.getElementById('sellerPhone').value,
+        sellerRegNo: document.getElementById('sellerRegNo').value,
+        incoterm: document.getElementById('incoterm').value,
+        portLoad: document.getElementById('portLoad').value,
+        portDest: document.getElementById('portDest').value,
+        packagingDetails: document.getElementById('packagingDetails').value,
+        certificationsDetails: document.getElementById('certificationsDetails').value,
+        bankSelector: document.getElementById('bankSelector').value,
+        items: items
+      };
+      localStorage.setItem('proformaInvoiceData', JSON.stringify(data));
+      alert('Proforma Invoice saved successfully!');
+    }
+
+    function loadData() {
+      const saved = localStorage.getItem('proformaInvoiceData');
+      if (!saved) return;
+
+      try {
+        const data = JSON.parse(saved);
+        document.getElementById('quoteNo').value = data.quoteNo || '';
+        document.getElementById('quoteDate').value = data.quoteDate || '';
+        document.getElementById('validDays').value = data.validDays || 7;
+        document.getElementById('currency').value = data.currency || 'USD';
+        document.getElementById('exchangeRate').value = data.exchangeRate || 1;
+        document.getElementById('buyerName').value = data.buyerName || '';
+        document.getElementById('buyerAddress').value = data.buyerAddress || '';
+        document.getElementById('sellerName').value = data.sellerName || 'Matara Spice Co.';
+        document.getElementById('sellerAddress').value = data.sellerAddress || 'Malimbada, Matara, Sri Lanka';
+        document.getElementById('sellerWebsite').value = data.sellerWebsite || 'www.mataraspice.com';
+        document.getElementById('sellerPhone').value = data.sellerPhone || '+65 9425 2874';
+        document.getElementById('sellerRegNo').value = data.sellerRegNo || '251023325405';
+        document.getElementById('incoterm').value = data.incoterm || '';
+        document.getElementById('portLoad').value = data.portLoad || '';
+        document.getElementById('portDest').value = data.portDest || '';
+        document.getElementById('packagingDetails').value = data.packagingDetails || '';
+        document.getElementById('certificationsDetails').value = data.certificationsDetails || '';
+        document.getElementById('bankSelector').value = data.bankSelector || 'HNB';
+        
+        if (data.items && data.items.length > 0) {
+          items = data.items;
+          itemIdCounter = Math.max(...items.map(i => i.id)) + 1;
+          renderItems();
+        }
+      } catch (e) {
+        console.error('Failed to load saved data:', e);
+      }
+    }
+
+    // Initialize on load
+    window.addEventListener('DOMContentLoaded', init);
+  </script>
+
+</body>
+</html>
