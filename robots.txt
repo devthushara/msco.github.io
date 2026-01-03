@@ -10,6 +10,10 @@ Disallow: /.github/
 Disallow: /README.md
 Disallow: /.gitignore
 
+# LLM discovery files (keep crawlable)
+Allow: /llms.txt
+Allow: /llms-full.txt
+
 # 2. OpenAI (ChatGPT / SearchGPT)
 User-agent: GPTBot
 Allow: /
@@ -39,6 +43,10 @@ Allow: /
 
 # 7. Facebook / Meta AI
 User-agent: FacebookBot
+Allow: /
+
+# 7b. Apple (Applebot is used across Apple services)
+User-agent: Applebot
 Allow: /
 
 # 8. Sitemap Location (Crucial for discovery)

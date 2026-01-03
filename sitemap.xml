@@ -3,44 +3,51 @@
   
   <url>
     <loc>https://mataraspice.com/</loc>
-    <lastmod>2025-12-19</lastmod>
+    <lastmod>2026-01-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
 
   <url>
-    <loc>https://mataraspice.com/brand-overview.pdf</loc>
-    <lastmod>2025-12-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
     <loc>https://mataraspice.com/teekay.html</loc>
-    <lastmod>2025-12-19</lastmod>
+    <lastmod>2026-01-03</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://mataraspice.com/edward.html</loc>
-    <lastmod>2025-12-19</lastmod>
+    <lastmod>2026-01-03</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>
 
   <url>
-    <loc>https://mataraspice.com/q.html</loc>
-    <lastmod>2025-12-19</lastmod>
+    <loc>https://mataraspice.com/nish.html</loc>
+    <lastmod>2026-01-03</lastmod>
     <changefreq>yearly</changefreq>
-    <priority>0.4</priority>
+    <priority>0.5</priority>
   </url>
 
   <url>
     <loc>https://mataraspice.com/legal.html</loc>
-    <lastmod>2025-12-19</lastmod>
+    <lastmod>2026-01-03</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
+  </url>
+
+  <url>
+    <loc>https://mataraspice.com/llms.txt</loc>
+    <lastmod>2026-01-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.2</priority>
+  </url>
+
+  <url>
+    <loc>https://mataraspice.com/llms-full.txt</loc>
+    <lastmod>2026-01-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.2</priority>
   </url>
 
 </urlset>

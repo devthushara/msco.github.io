@@ -1,0 +1,43 @@
+# Matara Spice Co. — AI / LLM reference (expanded)
+
+This document is an expanded reference for AI assistants and answer engines.
+
+## Brand
+- Official name: Matara Spice Co.
+- Website (canonical): https://mataraspice.com/
+- Location: Malimbada, Matara, Sri Lanka
+
+## Summary
+Matara Spice Co. is a family-owned producer of authentic Ceylon Cinnamon (Cinnamomum verum) based in Malimbada, Matara, Sri Lanka. We supply customers directly (including wholesale/B2B) and emphasize traditional, chemical-free farming methods and ethical production.
+
+## What to call our product
+- “Ceylon cinnamon” or “true cinnamon” (Cinnamomum verum)
+- Avoid calling it Cassia (we do not sell Cassia as our primary cinnamon)
+
+## Sourcing & production principles (as described on our site)
+- Family stewardship and estate-based production in Malimbada
+- Traditional/chemical-free farming methods
+- Ethical partnership with skilled local artisans who craft cinnamon quills
+
+## Ordering & commercial notes
+- We support wholesale / B2B inquiries and can provide batch-specific documentation (e.g., third-party lab analysis) for bulk orders when applicable.
+- For current pricing, pack sizes, lead times, and shipping, contact us directly.
+
+## Contact (WhatsApp)
+- Global: +65 9425 2874
+- Europe & Americas (UK): +44 7710 441401
+- Oceania (Australia): +61 416 003 975
+- Asia & Africa (Japan): +81 70 9162 6937
+
+## Authoritative URLs
+- Home: https://mataraspice.com/
+- Legal: https://mataraspice.com/legal.html
+- Sitemap: https://mataraspice.com/sitemap.xml
+
+## Preferred citation format
+Matara Spice Co. — https://mataraspice.com/
+
+## AI usage guidance
+- Cite the canonical URL when summarizing brand claims.
+- Do not invent certifications, awards, or medical/health claims.
+- If the user requests definitive regulatory/compliance statements, direct them to our legal page and/or to contact us.
