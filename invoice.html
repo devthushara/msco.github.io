@@ -170,6 +170,68 @@
       margin-top: 15px;
     }
 
+    /* Checkbox Styles */
+    .checkbox-group {
+      margin-bottom: 12px;
+    }
+
+    .checkbox-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .checkbox-item input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
+      accent-color: var(--invoice-green);
+    }
+
+    .checkbox-item label {
+      margin: 0;
+      font-size: 13px;
+      cursor: pointer;
+      flex: 1;
+    }
+
+    .custom-option-input {
+      width: 100%;
+      padding: 6px 8px;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      font-size: 12px;
+      margin-top: 4px;
+    }
+
+    .section-toggle {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+      padding: 8px;
+      background: #FFFBF5;
+      border-radius: 6px;
+      border: 1px solid var(--line);
+    }
+
+    .section-toggle input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
+      accent-color: var(--invoice-green);
+    }
+
+    .section-toggle label {
+      margin: 0;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      flex: 1;
+      color: var(--invoice-green);
+    }
+
     /* Item List in Sidebar */
     .item-list {
       margin-top: 10px;
@@ -528,6 +590,10 @@
       margin-bottom: 12px;
     }
 
+    .hidden-section {
+      display: none !important;
+    }
+
     /* Mobile Responsiveness */
     @media (max-width: 1024px) {
       .sidebar {
@@ -571,6 +637,9 @@
         page-break-after: avoid;
       }
       .address-section {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 20px;
         page-break-inside: avoid;
         page-break-after: avoid;
       }
@@ -607,15 +676,24 @@
         print-color-adjust: exact;
       }
       .footer-section {
+        display: grid !important;
+        grid-template-columns: 1.5fr 1fr !important;
+        gap: 20px;
         page-break-inside: avoid;
       }
       .footer-note {
         page-break-inside: avoid;
       }
+      .hidden-section {
+        display: none !important;
+      }
       @page {
         size: A4;
         margin: 12mm;
       }
+      /* Hide browser's default header and footer */
+      @page { margin: 0; }
+      body { margin: 1.6cm; }
     }
   </style>
 </head>
@@ -737,33 +815,87 @@
 
     <!-- Packaging & Certifications -->
     <div class="sidebar-section">
-      <h3><i class="ph ph-package"></i> Packaging & Certifications</h3>
-      <div class="form-group">
-        <label>Packaging Details</label>
-        <textarea id="packagingDetails" rows="4">• 1 kg food-grade poly packs
+      <div class="section-toggle">
+        <input type="checkbox" id="togglePackaging" checked onchange="toggleSection('packaging')">
+        <label for="togglePackaging">Show Packaging & Certifications</label>
+      </div>
+      <div id="packagingSection">
+        <h3><i class="ph ph-package"></i> Packaging & Certifications</h3>
+        <div class="form-group">
+          <label>Packaging Details</label>
+          <textarea id="packagingDetails" rows="4">• 1 kg food-grade poly packs
 • 25 kg per master carton
 • Export corrugated cartons
 • Full labeling included</textarea>
-      </div>
-      <div class="form-group">
-        <label>Certifications</label>
-        <textarea id="certificationsDetails" rows="4">• Phytosanitary Certificate
+        </div>
+        <div class="form-group">
+          <label>Certifications</label>
+          <textarea id="certificationsDetails" rows="4">• Phytosanitary Certificate
 • Certificate of Origin
 • Quality Certificate
 • Fumigation (if requested)</textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- Payment Terms -->
+    <div class="sidebar-section">
+      <div class="section-toggle">
+        <input type="checkbox" id="togglePayment" checked onchange="toggleSection('payment')">
+        <label for="togglePayment">Show Payment Terms</label>
+      </div>
+      <div id="paymentSection">
+        <h3><i class="ph ph-money"></i> Payment Terms</h3>
+        <div class="checkbox-group">
+          <div class="checkbox-item">
+            <input type="checkbox" id="paymentLC" checked onchange="updatePreview()">
+            <label for="paymentLC">Letter of Credit (LC)</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="paymentAdvance" checked onchange="updatePreview()">
+            <label for="paymentAdvance">50% Advance / 50% Before Shipment</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="paymentTT" onchange="updatePreview()">
+            <label for="paymentTT">Telegraphic Transfer (TT)</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="paymentCAD" onchange="updatePreview()">
+            <label for="paymentCAD">Cash Against Documents (CAD)</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Custom Payment Terms (one per line)</label>
+          <textarea id="customPaymentTerms" rows="3" placeholder="Add custom payment terms..." oninput="updatePreview()"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- Custom Notes -->
+    <div class="sidebar-section">
+      <h3><i class="ph ph-note"></i> Custom Notes</h3>
+      <div class="form-group">
+        <label>Additional Notes (Optional)</label>
+        <textarea id="customNotes" rows="4" placeholder="Add any additional notes or special instructions..." oninput="updatePreview()"></textarea>
       </div>
     </div>
 
     <!-- Bank Selection -->
     <div class="sidebar-section">
-      <h3><i class="ph ph-bank"></i> Bank Details</h3>
-      <div class="form-group">
-        <label>Select Bank</label>
-        <select id="bankSelector">
-          <option value="HNB">HNB - Sri Lanka</option>
-          <option value="DBS">DBS - Singapore</option>
-          <option value="JPPost">JP Post Bank - Japan</option>
-        </select>
+      <div class="section-toggle">
+        <input type="checkbox" id="toggleBank" checked onchange="toggleSection('bank')">
+        <label for="toggleBank">Show Bank Details</label>
+      </div>
+      <div id="bankSection">
+        <h3><i class="ph ph-bank"></i> Bank Details</h3>
+        <div class="form-group">
+          <label>Select Bank</label>
+          <select id="bankSelector">
+            <option value="HNB">HNB - Sri Lanka</option>
+            <option value="DBS">DBS - Singapore</option>
+            <option value="JPPost">JP Post Bank - Japan</option>
+          </select>
+        </div>
       </div>
     </div>
 
@@ -896,8 +1028,8 @@
       </table>
 
       <!-- Footer -->
-      <div class="footer-section">
-        <div class="bank-details">
+      <div class="footer-section" id="footerSection">
+        <div class="bank-details" id="bankDetailsBox">
           <h4><i class="ph ph-bank"></i> Payment Details</h4>
           <div class="bank-row">
             <span class="bank-label">Bank Name:</span>
@@ -935,8 +1067,16 @@
         </div>
       </div>
 
-      <div class="footer-note">
-        <p><strong>Payment Terms:</strong> Payment due within specified date. Late payments may incur additional charges.</p>
+      <div class="footer-note" id="notesSection">
+        <div id="customNotesDisplay" style="margin-bottom: 15px; padding-bottom: 12px; border-bottom: 1px solid var(--line);"></div>
+        <div id="paymentTermsBox">
+          <p><strong>Payment Terms:</strong> <span id="displayPaymentTerms">Payment due within specified date. Late payments may incur additional charges.</span></p>
+        </div>
+        <div id="packagingNotesBox">
+          <p><strong>Packaging:</strong> <span id="displayPackagingNote">• 1 kg food-grade poly packs
+• 25 kg per master carton
+• Export corrugated cartons</span></p>
+        </div>
         <p><strong>Note:</strong> This is a computer-generated invoice. For any queries, please contact us at info@mataraspice.com</p>
       </div>
     </div>
@@ -992,6 +1132,23 @@
       const num = String(Math.floor(Math.random() * 99999999) + 1).padStart(8, '0');
       document.getElementById('invoiceNo').value = `MSC/INV/${year}/${num}`;
 
+      // Set default seller values if empty
+      if (!document.getElementById('sellerName').value) {
+        document.getElementById('sellerName').value = 'Matara Spice Co.';
+      }
+      if (!document.getElementById('sellerAddress').value) {
+        document.getElementById('sellerAddress').value = 'Malimbada, Matara, Sri Lanka';
+      }
+      if (!document.getElementById('sellerWebsite').value) {
+        document.getElementById('sellerWebsite').value = 'www.mataraspice.com';
+      }
+      if (!document.getElementById('sellerPhone').value) {
+        document.getElementById('sellerPhone').value = '+65 9425 2874';
+      }
+      if (!document.getElementById('sellerRegNo').value) {
+        document.getElementById('sellerRegNo').value = '251023325405';
+      }
+
       // Add event listeners
       document.getElementById('invoiceNo').addEventListener('input', updatePreview);
       document.getElementById('invoiceDate').addEventListener('change', updatePreview);
@@ -1022,6 +1179,65 @@
       
       // Initial render
       updatePreview();
+    }
+
+    // Toggle Section Visibility
+    function toggleSection(section) {
+      const sections = {
+        'packaging': { contentId: 'packagingSection', displayIds: ['packagingNotesBox'] },
+        'payment': { contentId: 'paymentSection', displayIds: ['paymentTermsBox'] },
+        'bank': { contentId: 'bankSection', displayId: 'bankDetailsBox' }
+      };
+
+      const config = sections[section];
+      const checkbox = document.getElementById(`toggle${section.charAt(0).toUpperCase() + section.slice(1)}`);
+      const contentDiv = document.getElementById(config.contentId);
+      
+      if (contentDiv) {
+        contentDiv.style.display = checkbox.checked ? 'block' : 'none';
+      }
+
+      // Handle display boxes
+      if (config.displayId) {
+        const displayBox = document.getElementById(config.displayId);
+        if (displayBox) {
+          if (checkbox.checked) {
+            displayBox.classList.remove('hidden-section');
+          } else {
+            displayBox.classList.add('hidden-section');
+          }
+        }
+      }
+
+      if (config.displayIds) {
+        config.displayIds.forEach(id => {
+          const displayBox = document.getElementById(id);
+          if (displayBox) {
+            if (checkbox.checked) {
+              displayBox.classList.remove('hidden-section');
+            } else {
+              displayBox.classList.add('hidden-section');
+            }
+          }
+        });
+      }
+
+      // Check if sections should be hidden
+      updateFooterSectionVisibility();
+      updatePreview();
+    }
+
+    function updateFooterSectionVisibility() {
+      const footerSection = document.getElementById('footerSection');
+      const bankVisible = !document.getElementById('bankDetailsBox')?.classList.contains('hidden-section');
+      
+      if (footerSection) {
+        if (bankVisible) {
+          footerSection.classList.remove('hidden-section');
+        } else {
+          footerSection.classList.add('hidden-section');
+        }
+      }
     }
 
     // Auto Bullet Point Generation
@@ -1092,8 +1308,8 @@
             </button>
           </div>
           <div class="form-group">
-            <input type="text" placeholder="Description" value="${item.description}" 
-              onchange="updateItemField(${item.id}, 'description', this.value)">
+            <textarea placeholder="Description" rows="2" 
+              onchange="updateItemField(${item.id}, 'description', this.value)">${item.description}</textarea>
           </div>
           <div class="form-row">
             <div class="form-group">
@@ -1142,7 +1358,7 @@
       const invoiceNo = document.getElementById('invoiceNo').value || '-';
       const invoiceDate = document.getElementById('invoiceDate').value;
       const dueDate = document.getElementById('dueDate').value;
-      const poNumber = document.getElementById('poNumber').value || '-';
+      const poNumber = document.getElementById('poNumber').value;
       
       document.getElementById('displayInvoiceNo').textContent = invoiceNo;
       document.getElementById('displayDate').textContent = invoiceDate ? 
@@ -1151,7 +1367,15 @@
         new Date(dueDate).toLocaleDateString('en-GB') : '-';
       document.getElementById('displayPaymentDueDate').textContent = dueDate ? 
         new Date(dueDate).toLocaleDateString('en-GB') : '-';
-      document.getElementById('displayPONumber').textContent = poNumber;
+      
+      // PO Number - show/hide row based on value
+      const poNumberRow = document.getElementById('displayPONumber').closest('tr');
+      if (poNumber) {
+        document.getElementById('displayPONumber').textContent = poNumber;
+        poNumberRow.style.display = '';
+      } else {
+        poNumberRow.style.display = 'none';
+      }
 
       // Payment Status
       const status = document.getElementById('paymentStatus').value;
@@ -1181,17 +1405,44 @@
       // Seller
       const sellerName = document.getElementById('sellerName').value || 'Matara Spice Co.';
       const sellerAddress = document.getElementById('sellerAddress').value || 'Malimbada, Matara, Sri Lanka';
-      const sellerWebsite = document.getElementById('sellerWebsite').value || 'www.mataraspice.com';
-      const sellerPhone = document.getElementById('sellerPhone').value || '+65 9425 2874';
-      const sellerRegNo = document.getElementById('sellerRegNo').value || '251023325405';
+      const sellerWebsite = document.getElementById('sellerWebsite').value;
+      const sellerPhone = document.getElementById('sellerPhone').value;
+      const sellerRegNo = document.getElementById('sellerRegNo').value;
 
       document.getElementById('displaySellerName').textContent = sellerName;
       document.getElementById('displaySellerNameHeader').textContent = sellerName;
       document.getElementById('displaySellerAddress').textContent = sellerAddress;
       document.getElementById('displaySellerAddressHeader').textContent = sellerAddress;
-      document.getElementById('displaySellerWebsite').textContent = sellerWebsite;
-      document.getElementById('displaySellerPhone').textContent = sellerPhone;
-      document.getElementById('displaySellerRegNo').textContent = sellerRegNo;
+      
+      // Website - show/hide based on value
+      const websiteElement = document.getElementById('displaySellerWebsite').parentElement;
+      if (sellerWebsite) {
+        document.getElementById('displaySellerWebsite').textContent = sellerWebsite;
+        websiteElement.style.display = '';
+      } else {
+        websiteElement.style.display = 'none';
+      }
+      
+      // Phone - show/hide based on value
+      const phoneElement = document.getElementById('displaySellerPhone').parentElement;
+      if (sellerPhone) {
+        document.getElementById('displaySellerPhone').textContent = sellerPhone;
+        phoneElement.style.display = '';
+      } else {
+        phoneElement.style.display = 'none';
+      }
+      
+      // Registration No - show/hide based on value in header
+      const regNoElements = document.querySelectorAll('[id*="displaySellerRegNo"]');
+      regNoElements.forEach(el => {
+        const parent = el.closest('p');
+        if (sellerRegNo) {
+          el.textContent = sellerRegNo;
+          if (parent) parent.style.display = '';
+        } else {
+          if (parent) parent.style.display = 'none';
+        }
+      });
 
       // Items Table & Calculations
       const tbody = document.getElementById('displayItems');
@@ -1240,6 +1491,26 @@
         document.getElementById('displayDiscountRate').textContent = discountRate.toFixed(2);
       }
 
+      // Packaging Notes
+      const packagingDetails = document.getElementById('packagingDetails').value.trim();
+      const packagingNotesBox = document.getElementById('packagingNotesBox');
+      if (packagingDetails) {
+        document.getElementById('displayPackagingNote').textContent = packagingDetails;
+        packagingNotesBox.style.display = 'block';
+      } else {
+        packagingNotesBox.style.display = 'none';
+      }
+
+      // Custom Notes
+      const customNotes = document.getElementById('customNotes').value.trim();
+      const customNotesDisplay = document.getElementById('customNotesDisplay');
+      if (customNotes) {
+        customNotesDisplay.innerHTML = `<p><strong>Notes:</strong></p><p style="white-space: pre-line; margin-top: 5px;">${customNotes}</p>`;
+        customNotesDisplay.style.display = 'block';
+      } else {
+        customNotesDisplay.style.display = 'none';
+      }
+
       // Bank Details
       const bank = bankData[document.getElementById('bankSelector').value];
       document.getElementById('displayBankName').textContent = bank.name;
@@ -1247,6 +1518,44 @@
       document.getElementById('displayBankAccNo').textContent = bank.accNo;
       document.getElementById('displayBankBranch').textContent = bank.branch;
       document.getElementById('displayBankSwift').textContent = bank.swift;
+
+      // Payment Terms
+      const paymentTerms = [];
+      if (document.getElementById('paymentLC').checked) {
+        paymentTerms.push('Letter of Credit (LC)');
+      }
+      if (document.getElementById('paymentAdvance').checked) {
+        paymentTerms.push('50% Advance / 50% Before Shipment');
+      }
+      if (document.getElementById('paymentTT').checked) {
+        paymentTerms.push('Telegraphic Transfer (TT)');
+      }
+      if (document.getElementById('paymentCAD').checked) {
+        paymentTerms.push('Cash Against Documents (CAD)');
+      }
+
+      // Add custom payment terms
+      const customTerms = document.getElementById('customPaymentTerms').value.trim();
+      if (customTerms) {
+        customTerms.split('\n').forEach(term => {
+          if (term.trim()) {
+            paymentTerms.push(term.trim());
+          }
+        });
+      }
+
+      // Display payment terms
+      if (paymentTerms.length > 0) {
+        document.getElementById('displayPaymentTerms').textContent = paymentTerms.join(', ');
+      } else {
+        document.getElementById('displayPaymentTerms').textContent = 'Payment due within specified date. Late payments may incur additional charges.';
+      }
+
+      // Packaging Notes
+      const packagingDetails = document.getElementById('packagingDetails').value;
+      if (packagingDetails) {
+        document.getElementById('displayPackagingNote').textContent = packagingDetails;
+      }
     }
 
     // Save/Load Data
@@ -1271,7 +1580,16 @@
         packagingDetails: document.getElementById('packagingDetails').value,
         certificationsDetails: document.getElementById('certificationsDetails').value,
         bankSelector: document.getElementById('bankSelector').value,
-        items: items
+        items: items,
+        togglePackaging: document.getElementById('togglePackaging').checked,
+        togglePayment: document.getElementById('togglePayment').checked,
+        toggleBank: document.getElementById('toggleBank').checked,
+        paymentLC: document.getElementById('paymentLC').checked,
+        paymentAdvance: document.getElementById('paymentAdvance').checked,
+        paymentTT: document.getElementById('paymentTT').checked,
+        paymentCAD: document.getElementById('paymentCAD').checked,
+        customPaymentTerms: document.getElementById('customPaymentTerms').value,
+        customNotes: document.getElementById('customNotes').value
       };
       localStorage.setItem('invoiceData', JSON.stringify(data));
       alert('Invoice saved successfully!');
@@ -1308,6 +1626,28 @@
           itemIdCounter = Math.max(...items.map(i => i.id)) + 1;
           renderItems();
         }
+
+        // Restore toggle states
+        if (data.togglePackaging !== undefined) {
+          document.getElementById('togglePackaging').checked = data.togglePackaging;
+          toggleSection('packaging');
+        }
+        if (data.togglePayment !== undefined) {
+          document.getElementById('togglePayment').checked = data.togglePayment;
+          toggleSection('payment');
+        }
+        if (data.toggleBank !== undefined) {
+          document.getElementById('toggleBank').checked = data.toggleBank;
+          toggleSection('bank');
+        }
+
+        // Restore payment terms checkboxes
+        if (data.paymentLC !== undefined) document.getElementById('paymentLC').checked = data.paymentLC;
+        if (data.paymentAdvance !== undefined) document.getElementById('paymentAdvance').checked = data.paymentAdvance;
+        if (data.paymentTT !== undefined) document.getElementById('paymentTT').checked = data.paymentTT;
+        if (data.paymentCAD !== undefined) document.getElementById('paymentCAD').checked = data.paymentCAD;
+        if (data.customPaymentTerms) document.getElementById('customPaymentTerms').value = data.customPaymentTerms;
+        if (data.customNotes) document.getElementById('customNotes').value = data.customNotes;
       } catch (e) {
         console.error('Failed to load saved data:', e);
       }

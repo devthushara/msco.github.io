@@ -169,6 +169,68 @@
       margin-top: 15px;
     }
 
+    /* Checkbox Styles */
+    .checkbox-group {
+      margin-bottom: 12px;
+    }
+
+    .checkbox-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .checkbox-item input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
+      accent-color: var(--accent);
+    }
+
+    .checkbox-item label {
+      margin: 0;
+      font-size: 13px;
+      cursor: pointer;
+      flex: 1;
+    }
+
+    .custom-option-input {
+      width: 100%;
+      padding: 6px 8px;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      font-size: 12px;
+      margin-top: 4px;
+    }
+
+    .section-toggle {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+      padding: 8px;
+      background: #FFFBF5;
+      border-radius: 6px;
+      border: 1px solid var(--line);
+    }
+
+    .section-toggle input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
+      accent-color: var(--accent);
+    }
+
+    .section-toggle label {
+      margin: 0;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      flex: 1;
+      color: var(--accent);
+    }
+
     /* Item List in Sidebar */
     .item-list {
       margin-top: 10px;
@@ -475,6 +537,10 @@
       page-break-inside: avoid;
     }
 
+    .hidden-section {
+      display: none !important;
+    }
+
     /* Mobile Responsiveness */
     @media (max-width: 1024px) {
       .sidebar {
@@ -497,7 +563,6 @@
       }
     }
 
-    /* Print Styles */
     @media print {
       body { background: white; }
       .sidebar,
@@ -516,6 +581,9 @@
         page-break-after: avoid;
       }
       .address-section {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 20px;
         page-break-inside: avoid;
         page-break-after: avoid;
       }
@@ -536,18 +604,30 @@
         page-break-inside: avoid;
       }
       .terms-section {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 20px;
         page-break-inside: avoid;
       }
       .footer-section {
+        display: grid !important;
+        grid-template-columns: 1.5fr 1fr !important;
+        gap: 20px;
         page-break-inside: avoid;
       }
       .footer-note {
         page-break-inside: avoid;
       }
+      .hidden-section {
+        display: none !important;
+      }
       @page {
         size: A4;
         margin: 12mm;
       }
+      /* Hide browser's default header and footer */
+      @page { margin: 0; }
+      body { margin: 1.6cm; }
     }
   </style>
 </head>
@@ -647,50 +727,110 @@
 
     <!-- Shipping Terms -->
     <div class="sidebar-section">
-      <h3><i class="ph ph-truck"></i> Shipping Terms</h3>
-      <div class="form-group">
-        <label>Incoterm</label>
-        <input type="text" id="incoterm" placeholder="FOB, CIF, CNF, etc.">
+      <div class="section-toggle">
+        <input type="checkbox" id="toggleShipping" checked onchange="toggleSection('shipping')">
+        <label for="toggleShipping">Show Shipping Terms</label>
       </div>
-      <div class="form-group">
-        <label>Port of Loading</label>
-        <input type="text" id="portLoad" placeholder="e.g., Colombo, Sri Lanka">
-      </div>
-      <div class="form-group">
-        <label>Port of Destination</label>
-        <input type="text" id="portDest" placeholder="Destination port">
+      <div id="shippingSection">
+        <h3><i class="ph ph-truck"></i> Shipping Terms</h3>
+        <div class="form-group">
+          <label>Incoterm</label>
+          <input type="text" id="incoterm" placeholder="FOB, CIF, CNF, etc.">
+        </div>
+        <div class="form-group">
+          <label>Port of Loading</label>
+          <input type="text" id="portLoad" placeholder="e.g., Colombo, Sri Lanka">
+        </div>
+        <div class="form-group">
+          <label>Port of Destination</label>
+          <input type="text" id="portDest" placeholder="Destination port">
+        </div>
       </div>
     </div>
 
     <!-- Packaging & Certifications -->
     <div class="sidebar-section">
-      <h3><i class="ph ph-package"></i> Packaging & Certifications</h3>
-      <div class="form-group">
-        <label>Packaging Details</label>
-        <textarea id="packagingDetails" rows="4">• 1 kg food-grade poly packs
+      <div class="section-toggle">
+        <input type="checkbox" id="togglePackaging" checked onchange="toggleSection('packaging')">
+        <label for="togglePackaging">Show Packaging & Certifications</label>
+      </div>
+      <div id="packagingSection">
+        <h3><i class="ph ph-package"></i> Packaging & Certifications</h3>
+        <div class="form-group">
+          <label>Packaging Details</label>
+          <textarea id="packagingDetails" rows="4">• 1 kg food-grade poly packs
 • 25 kg per master carton
 • Export corrugated cartons
 • Full labeling included</textarea>
-      </div>
-      <div class="form-group">
-        <label>Certifications</label>
-        <textarea id="certificationsDetails" rows="4">• Phytosanitary Certificate
+        </div>
+        <div class="form-group">
+          <label>Certifications</label>
+          <textarea id="certificationsDetails" rows="4">• Phytosanitary Certificate
 • Certificate of Origin
 • Quality Certificate
 • Fumigation (if requested)</textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- Payment Terms -->
+    <div class="sidebar-section">
+      <div class="section-toggle">
+        <input type="checkbox" id="togglePayment" checked onchange="toggleSection('payment')">
+        <label for="togglePayment">Show Payment Terms</label>
+      </div>
+      <div id="paymentSection">
+        <h3><i class="ph ph-money"></i> Payment Terms</h3>
+        <div class="checkbox-group">
+          <div class="checkbox-item">
+            <input type="checkbox" id="paymentLC" checked onchange="updatePreview()">
+            <label for="paymentLC">Letter of Credit (LC)</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="paymentAdvance" checked onchange="updatePreview()">
+            <label for="paymentAdvance">50% Advance / 50% Before Shipment</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="paymentTT" onchange="updatePreview()">
+            <label for="paymentTT">Telegraphic Transfer (TT)</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="paymentCAD" onchange="updatePreview()">
+            <label for="paymentCAD">Cash Against Documents (CAD)</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Custom Payment Terms (one per line)</label>
+          <textarea id="customPaymentTerms" rows="3" placeholder="Add custom payment terms..." oninput="updatePreview()"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- Custom Notes -->
+    <div class="sidebar-section">
+      <h3><i class="ph ph-note"></i> Custom Notes</h3>
+      <div class="form-group">
+        <label>Additional Notes (Optional)</label>
+        <textarea id="customNotes" rows="4" placeholder="Add any additional notes or special instructions..." oninput="updatePreview()"></textarea>
       </div>
     </div>
 
     <!-- Bank Selection -->
     <div class="sidebar-section">
-      <h3><i class="ph ph-bank"></i> Bank Details</h3>
-      <div class="form-group">
-        <label>Select Bank</label>
-        <select id="bankSelector">
-          <option value="HNB">HNB - Sri Lanka</option>
-          <option value="DBS">DBS - Singapore</option>
-          <option value="JPPost">JP Post Bank - Japan</option>
-        </select>
+      <div class="section-toggle">
+        <input type="checkbox" id="toggleBank" checked onchange="toggleSection('bank')">
+        <label for="toggleBank">Show Bank Details</label>
+      </div>
+      <div id="bankSection">
+        <h3><i class="ph ph-bank"></i> Bank Details</h3>
+        <div class="form-group">
+          <label>Select Bank</label>
+          <select id="bankSelector">
+            <option value="HNB">HNB - Sri Lanka</option>
+            <option value="DBS">DBS - Singapore</option>
+            <option value="JPPost">JP Post Bank - Japan</option>
+          </select>
+        </div>
       </div>
     </div>
 
@@ -788,9 +928,9 @@
       </table>
 
       <!-- Terms -->
-      <div class="terms-section">
+      <div class="terms-section" id="termsSection">
         <div>
-          <div class="term-box">
+          <div class="term-box" id="packagingBox">
             <h4><i class="ph ph-package"></i> Packaging Details</h4>
             <p id="displayPackaging">• 1 kg food-grade poly packs
 • 25 kg per master carton
@@ -798,7 +938,7 @@
 • Full labeling included</p>
           </div>
           
-          <div class="term-box" style="margin-top: 20px;">
+          <div class="term-box" style="margin-top: 20px;" id="certificationsBox">
             <h4><i class="ph ph-certificate"></i> Certifications</h4>
             <p id="displayCertifications">• Phytosanitary Certificate
 • Certificate of Origin
@@ -808,24 +948,26 @@
         </div>
 
         <div>
-          <div class="term-box">
+          <div class="term-box" id="shippingBox">
             <h4><i class="ph ph-truck"></i> Shipping Terms</h4>
             <p><strong>Incoterm:</strong> <span id="displayIncoterm">-</span>
 <strong>Port of Loading:</strong> <span id="displayPortLoad">-</span>
 <strong>Destination:</strong> <span id="displayPortDest">-</span></p>
           </div>
 
-          <div class="term-box" style="margin-top: 20px;">
+          <div class="term-box" style="margin-top: 20px;" id="paymentBox">
             <h4><i class="ph ph-money"></i> Payment Terms</h4>
-            <p><strong>Preferred:</strong> Letter of Credit (LC)
+            <div id="displayPaymentTerms">
+              <p><strong>Preferred:</strong> Letter of Credit (LC)
 <strong>Alternative:</strong> 50% Advance / 50% Before Shipment</p>
+            </div>
           </div>
         </div>
       </div>
 
       <!-- Footer -->
-      <div class="footer-section">
-        <div class="bank-details">
+      <div class="footer-section" id="footerSection">
+        <div class="bank-details" id="bankDetailsBox">
           <h4><i class="ph ph-bank"></i> Bank Details</h4>
           <div class="bank-row">
             <span class="bank-label">Bank Name:</span>
@@ -858,6 +1000,7 @@
       </div>
 
       <div class="footer-note">
+        <div id="customNotesDisplay" style="margin-bottom: 15px; padding-bottom: 12px; border-bottom: 1px solid var(--line);"></div>
         <p>This proforma invoice is not a binding contract. Order confirmation required. Prices valid for <span id="displayValidDaysFooter">7</span> days and may vary based on market rates. Final invoice will reflect exact packed weight.</p>
       </div>
     </div>
@@ -908,6 +1051,23 @@
       const num = String(Math.floor(Math.random() * 99999999) + 1).padStart(8, '0');
       document.getElementById('quoteNo').value = `MSC/PI/${year}/${num}`;
 
+      // Set default seller values if empty
+      if (!document.getElementById('sellerName').value) {
+        document.getElementById('sellerName').value = 'Matara Spice Co.';
+      }
+      if (!document.getElementById('sellerAddress').value) {
+        document.getElementById('sellerAddress').value = 'Malimbada, Matara, Sri Lanka';
+      }
+      if (!document.getElementById('sellerWebsite').value) {
+        document.getElementById('sellerWebsite').value = 'www.mataraspice.com';
+      }
+      if (!document.getElementById('sellerPhone').value) {
+        document.getElementById('sellerPhone').value = '+65 9425 2874';
+      }
+      if (!document.getElementById('sellerRegNo').value) {
+        document.getElementById('sellerRegNo').value = '251023325405';
+      }
+
       // Add event listeners
       document.getElementById('quoteNo').addEventListener('input', updatePreview);
       document.getElementById('quoteDate').addEventListener('change', updatePreview);
@@ -937,6 +1097,84 @@
       
       // Initial render
       updatePreview();
+    }
+
+    // Toggle Section Visibility
+    function toggleSection(section) {
+      const sections = {
+        'shipping': { contentId: 'shippingSection', displayId: 'shippingBox' },
+        'packaging': { contentId: 'packagingSection', displayIds: ['packagingBox', 'certificationsBox'] },
+        'payment': { contentId: 'paymentSection', displayId: 'paymentBox' },
+        'bank': { contentId: 'bankSection', displayId: 'bankDetailsBox' }
+      };
+
+      const config = sections[section];
+      const checkbox = document.getElementById(`toggle${section.charAt(0).toUpperCase() + section.slice(1)}`);
+      const contentDiv = document.getElementById(config.contentId);
+      
+      if (contentDiv) {
+        contentDiv.style.display = checkbox.checked ? 'block' : 'none';
+      }
+
+      // Handle display boxes
+      if (config.displayId) {
+        const displayBox = document.getElementById(config.displayId);
+        if (displayBox) {
+          if (checkbox.checked) {
+            displayBox.classList.remove('hidden-section');
+          } else {
+            displayBox.classList.add('hidden-section');
+          }
+        }
+      }
+
+      if (config.displayIds) {
+        config.displayIds.forEach(id => {
+          const displayBox = document.getElementById(id);
+          if (displayBox) {
+            if (checkbox.checked) {
+              displayBox.classList.remove('hidden-section');
+            } else {
+              displayBox.classList.add('hidden-section');
+            }
+          }
+        });
+      }
+
+      // Check if terms section should be hidden
+      updateTermsSectionVisibility();
+      updateFooterSectionVisibility();
+      updatePreview();
+    }
+
+    function updateTermsSectionVisibility() {
+      const termsSection = document.getElementById('termsSection');
+      const hasVisibleTerms = 
+        !document.getElementById('shippingBox').classList.contains('hidden-section') ||
+        !document.getElementById('packagingBox').classList.contains('hidden-section') ||
+        !document.getElementById('certificationsBox').classList.contains('hidden-section') ||
+        !document.getElementById('paymentBox').classList.contains('hidden-section');
+      
+      if (termsSection) {
+        if (hasVisibleTerms) {
+          termsSection.classList.remove('hidden-section');
+        } else {
+          termsSection.classList.add('hidden-section');
+        }
+      }
+    }
+
+    function updateFooterSectionVisibility() {
+      const footerSection = document.getElementById('footerSection');
+      const bankVisible = !document.getElementById('bankDetailsBox').classList.contains('hidden-section');
+      
+      if (footerSection) {
+        if (bankVisible) {
+          footerSection.classList.remove('hidden-section');
+        } else {
+          footerSection.classList.add('hidden-section');
+        }
+      }
     }
 
     // Auto Bullet Point Generation
@@ -1007,8 +1245,8 @@
             </button>
           </div>
           <div class="form-group">
-            <input type="text" placeholder="Description" value="${item.description}" 
-              onchange="updateItemField(${item.id}, 'description', this.value)">
+            <textarea placeholder="Description" rows="2" 
+              onchange="updateItemField(${item.id}, 'description', this.value)">${item.description}</textarea>
           </div>
           <div class="form-row">
             <div class="form-group">
@@ -1095,17 +1333,44 @@
       // Seller
       const sellerName = document.getElementById('sellerName').value || 'Matara Spice Co.';
       const sellerAddress = document.getElementById('sellerAddress').value || 'Malimbada, Matara, Sri Lanka';
-      const sellerWebsite = document.getElementById('sellerWebsite').value || 'www.mataraspice.com';
-      const sellerPhone = document.getElementById('sellerPhone').value || '+65 9425 2874';
-      const sellerRegNo = document.getElementById('sellerRegNo').value || '251023325405';
+      const sellerWebsite = document.getElementById('sellerWebsite').value;
+      const sellerPhone = document.getElementById('sellerPhone').value;
+      const sellerRegNo = document.getElementById('sellerRegNo').value;
 
       document.getElementById('displaySellerName').textContent = sellerName;
       document.getElementById('displaySellerNameHeader').textContent = sellerName;
       document.getElementById('displaySellerAddress').textContent = sellerAddress;
       document.getElementById('displaySellerAddressHeader').textContent = sellerAddress;
-      document.getElementById('displaySellerWebsite').textContent = sellerWebsite;
-      document.getElementById('displaySellerPhone').textContent = sellerPhone;
-      document.getElementById('displaySellerRegNo').textContent = sellerRegNo;
+      
+      // Website - show/hide based on value
+      const websiteElement = document.getElementById('displaySellerWebsite').parentElement;
+      if (sellerWebsite) {
+        document.getElementById('displaySellerWebsite').textContent = sellerWebsite;
+        websiteElement.style.display = '';
+      } else {
+        websiteElement.style.display = 'none';
+      }
+      
+      // Phone - show/hide based on value
+      const phoneElement = document.getElementById('displaySellerPhone').parentElement;
+      if (sellerPhone) {
+        document.getElementById('displaySellerPhone').textContent = sellerPhone;
+        phoneElement.style.display = '';
+      } else {
+        phoneElement.style.display = 'none';
+      }
+      
+      // Registration No - show/hide based on value in header
+      const regNoElements = document.querySelectorAll('[id*="displaySellerRegNo"]');
+      regNoElements.forEach(el => {
+        const parent = el.closest('p');
+        if (sellerRegNo) {
+          el.textContent = sellerRegNo;
+          if (parent) parent.style.display = '';
+        } else {
+          if (parent) parent.style.display = 'none';
+        }
+      });
 
       // Items Table
       const tbody = document.getElementById('displayItems');
@@ -1138,18 +1403,78 @@
       }
 
       // Shipping
-      document.getElementById('displayIncoterm').textContent = 
-        document.getElementById('incoterm').value || '-';
-      document.getElementById('displayPortLoad').textContent = 
-        document.getElementById('portLoad').value || '-';
-      document.getElementById('displayPortDest').textContent = 
-        document.getElementById('portDest').value || '-';
+      const incoterm = document.getElementById('incoterm').value;
+      const portLoad = document.getElementById('portLoad').value;
+      const portDest = document.getElementById('portDest').value;
+      
+      document.getElementById('displayIncoterm').textContent = incoterm || '-';
+      document.getElementById('displayPortLoad').textContent = portLoad || '-';
+      document.getElementById('displayPortDest').textContent = portDest || '-';
+      
+      // Hide shipping box if all fields are empty
+      const shippingBox = document.getElementById('shippingBox');
+      if (!incoterm && !portLoad && !portDest) {
+        shippingBox.style.display = 'none';
+      } else {
+        shippingBox.style.display = 'block';
+      }
 
       // Packaging & Certifications
       document.getElementById('displayPackaging').textContent = 
         document.getElementById('packagingDetails').value || '-';
       document.getElementById('displayCertifications').textContent = 
         document.getElementById('certificationsDetails').value || '-';
+
+      // Payment Terms
+      const paymentTerms = [];
+      if (document.getElementById('paymentLC').checked) {
+        paymentTerms.push('Letter of Credit (LC)');
+      }
+      if (document.getElementById('paymentAdvance').checked) {
+        paymentTerms.push('50% Advance / 50% Before Shipment');
+      }
+      if (document.getElementById('paymentTT').checked) {
+        paymentTerms.push('Telegraphic Transfer (TT)');
+      }
+      if (document.getElementById('paymentCAD').checked) {
+        paymentTerms.push('Cash Against Documents (CAD)');
+      }
+
+      // Add custom payment terms
+      const customTerms = document.getElementById('customPaymentTerms').value.trim();
+      if (customTerms) {
+        customTerms.split('\n').forEach(term => {
+          if (term.trim()) {
+            paymentTerms.push(term.trim());
+          }
+        });
+      }
+
+      // Display payment terms
+      const paymentDisplay = document.getElementById('displayPaymentTerms');
+      if (paymentTerms.length > 0) {
+        paymentDisplay.innerHTML = paymentTerms.map((term, idx) => {
+          if (idx === 0) {
+            return `<p><strong>Preferred:</strong> ${term}</p>`;
+          } else if (idx === 1) {
+            return `<p><strong>Alternative:</strong> ${term}</p>`;
+          } else {
+            return `<p>${term}</p>`;
+          }
+        }).join('');
+      } else {
+        paymentDisplay.innerHTML = '<p style="color: #999; font-style: italic;">No payment terms selected</p>';
+      }
+
+      // Custom Notes
+      const customNotes = document.getElementById('customNotes').value.trim();
+      const customNotesDisplay = document.getElementById('customNotesDisplay');
+      if (customNotes) {
+        customNotesDisplay.innerHTML = `<p><strong>Notes:</strong></p><p style="white-space: pre-line; margin-top: 5px;">${customNotes}</p>`;
+        customNotesDisplay.style.display = 'block';
+      } else {
+        customNotesDisplay.style.display = 'none';
+      }
 
       // Bank Details
       const bank = bankData[document.getElementById('bankSelector').value];
@@ -1181,7 +1506,17 @@
         packagingDetails: document.getElementById('packagingDetails').value,
         certificationsDetails: document.getElementById('certificationsDetails').value,
         bankSelector: document.getElementById('bankSelector').value,
-        items: items
+        items: items,
+        toggleShipping: document.getElementById('toggleShipping').checked,
+        togglePackaging: document.getElementById('togglePackaging').checked,
+        togglePayment: document.getElementById('togglePayment').checked,
+        toggleBank: document.getElementById('toggleBank').checked,
+        paymentLC: document.getElementById('paymentLC').checked,
+        paymentAdvance: document.getElementById('paymentAdvance').checked,
+        paymentTT: document.getElementById('paymentTT').checked,
+        paymentCAD: document.getElementById('paymentCAD').checked,
+        customPaymentTerms: document.getElementById('customPaymentTerms').value,
+        customNotes: document.getElementById('customNotes').value
       };
       localStorage.setItem('proformaInvoiceData', JSON.stringify(data));
       alert('Proforma Invoice saved successfully!');
@@ -1217,6 +1552,32 @@
           itemIdCounter = Math.max(...items.map(i => i.id)) + 1;
           renderItems();
         }
+
+        // Restore toggle states
+        if (data.toggleShipping !== undefined) {
+          document.getElementById('toggleShipping').checked = data.toggleShipping;
+          toggleSection('shipping');
+        }
+        if (data.togglePackaging !== undefined) {
+          document.getElementById('togglePackaging').checked = data.togglePackaging;
+          toggleSection('packaging');
+        }
+        if (data.togglePayment !== undefined) {
+          document.getElementById('togglePayment').checked = data.togglePayment;
+          toggleSection('payment');
+        }
+        if (data.toggleBank !== undefined) {
+          document.getElementById('toggleBank').checked = data.toggleBank;
+          toggleSection('bank');
+        }
+
+        // Restore payment terms checkboxes
+        if (data.paymentLC !== undefined) document.getElementById('paymentLC').checked = data.paymentLC;
+        if (data.paymentAdvance !== undefined) document.getElementById('paymentAdvance').checked = data.paymentAdvance;
+        if (data.paymentTT !== undefined) document.getElementById('paymentTT').checked = data.paymentTT;
+        if (data.paymentCAD !== undefined) document.getElementById('paymentCAD').checked = data.paymentCAD;
+        if (data.customPaymentTerms) document.getElementById('customPaymentTerms').value = data.customPaymentTerms;
+        if (data.customNotes) document.getElementById('customNotes').value = data.customNotes;
       } catch (e) {
         console.error('Failed to load saved data:', e);
       }
