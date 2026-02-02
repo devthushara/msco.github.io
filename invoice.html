@@ -781,30 +781,7 @@
       </div>
     </div>
 
-    <!-- Seller/Exporter Details -->
-    <div class="sidebar-section">
-      <h3><i class="ph ph-building"></i> Seller Details (From)</h3>
-      <div class="form-group">
-        <label>Company Name</label>
-        <input type="text" id="sellerName" value="Matara Spice Co.">
-      </div>
-      <div class="form-group">
-        <label>Address</label>
-        <textarea id="sellerAddress" rows="2">Malimbada, Matara, Sri Lanka</textarea>
-      </div>
-      <div class="form-group">
-        <label>Website</label>
-        <input type="text" id="sellerWebsite" value="www.mataraspice.com">
-      </div>
-      <div class="form-group">
-        <label>Phone/WhatsApp</label>
-        <input type="text" id="sellerPhone" value="+65 9425 2874">
-      </div>
-      <div class="form-group">
-        <label>Registration No</label>
-        <input type="text" id="sellerRegNo" value="251023325405">
-      </div>
-    </div>
+
 
     <!-- Items -->
     <div class="sidebar-section">
@@ -1122,9 +1099,9 @@
       const today = new Date().toISOString().split('T')[0];
       document.getElementById('invoiceDate').value = today;
 
-      // Set due date (30 days from today)
+      // Set due date (7 days from today)
       const dueDate = new Date();
-      dueDate.setDate(dueDate.getDate() + 30);
+      dueDate.setDate(dueDate.getDate() + 7);
       document.getElementById('dueDate').value = dueDate.toISOString().split('T')[0];
 
       // Auto-generate invoice number
@@ -1132,26 +1109,18 @@
       const num = String(Math.floor(Math.random() * 99999999) + 1).padStart(8, '0');
       document.getElementById('invoiceNo').value = `MSC/INV/${year}/${num}`;
 
-      // Set default seller values if empty
-      if (!document.getElementById('sellerName').value) {
-        document.getElementById('sellerName').value = 'Matara Spice Co.';
-      }
-      if (!document.getElementById('sellerAddress').value) {
-        document.getElementById('sellerAddress').value = 'Malimbada, Matara, Sri Lanka';
-      }
-      if (!document.getElementById('sellerWebsite').value) {
-        document.getElementById('sellerWebsite').value = 'www.mataraspice.com';
-      }
-      if (!document.getElementById('sellerPhone').value) {
-        document.getElementById('sellerPhone').value = '+65 9425 2874';
-      }
-      if (!document.getElementById('sellerRegNo').value) {
-        document.getElementById('sellerRegNo').value = '251023325405';
-      }
-
       // Add event listeners
       document.getElementById('invoiceNo').addEventListener('input', updatePreview);
-      document.getElementById('invoiceDate').addEventListener('change', updatePreview);
+      document.getElementById('invoiceDate').addEventListener('change', function() {
+        // Auto-update due date to 7 days after invoice date
+        const invoiceDate = new Date(this.value);
+        if (!isNaN(invoiceDate.getTime())) {
+          const dueDate = new Date(invoiceDate);
+          dueDate.setDate(dueDate.getDate() + 7);
+          document.getElementById('dueDate').value = dueDate.toISOString().split('T')[0];
+        }
+        updatePreview();
+      });
       document.getElementById('dueDate').addEventListener('change', updatePreview);
       document.getElementById('poNumber').addEventListener('input', updatePreview);
       document.getElementById('paymentStatus').addEventListener('change', updatePreview);
@@ -1161,11 +1130,6 @@
       document.getElementById('discountRate').addEventListener('input', updatePreview);
       document.getElementById('buyerName').addEventListener('input', updatePreview);
       document.getElementById('buyerAddress').addEventListener('input', updatePreview);
-      document.getElementById('sellerName').addEventListener('input', updatePreview);
-      document.getElementById('sellerAddress').addEventListener('input', updatePreview);
-      document.getElementById('sellerWebsite').addEventListener('input', updatePreview);
-      document.getElementById('sellerPhone').addEventListener('input', updatePreview);
-      document.getElementById('sellerRegNo').addEventListener('input', updatePreview);
       document.getElementById('packagingDetails').addEventListener('input', updatePreview);
       document.getElementById('certificationsDetails').addEventListener('input', updatePreview);
       document.getElementById('bankSelector').addEventListener('change', updatePreview);
@@ -1402,47 +1366,20 @@
         buyerDiv.innerHTML = '<p style="color: #999; font-style: italic;">No buyer details provided</p>';
       }
 
-      // Seller
-      const sellerName = document.getElementById('sellerName').value || 'Matara Spice Co.';
-      const sellerAddress = document.getElementById('sellerAddress').value || 'Malimbada, Matara, Sri Lanka';
-      const sellerWebsite = document.getElementById('sellerWebsite').value;
-      const sellerPhone = document.getElementById('sellerPhone').value;
-      const sellerRegNo = document.getElementById('sellerRegNo').value;
+      // Seller (hardcoded values for Matara Spice Co.)
+      const sellerName = 'Matara Spice Co.';
+      const sellerAddress = 'Malimbada, Matara, Sri Lanka';
+      const sellerWebsite = 'www.mataraspice.com';
+      const sellerPhone = '+65 9425 2874';
+      const sellerRegNo = '251023325405';
 
       document.getElementById('displaySellerName').textContent = sellerName;
       document.getElementById('displaySellerNameHeader').textContent = sellerName;
       document.getElementById('displaySellerAddress').textContent = sellerAddress;
       document.getElementById('displaySellerAddressHeader').textContent = sellerAddress;
-      
-      // Website - show/hide based on value
-      const websiteElement = document.getElementById('displaySellerWebsite').parentElement;
-      if (sellerWebsite) {
-        document.getElementById('displaySellerWebsite').textContent = sellerWebsite;
-        websiteElement.style.display = '';
-      } else {
-        websiteElement.style.display = 'none';
-      }
-      
-      // Phone - show/hide based on value
-      const phoneElement = document.getElementById('displaySellerPhone').parentElement;
-      if (sellerPhone) {
-        document.getElementById('displaySellerPhone').textContent = sellerPhone;
-        phoneElement.style.display = '';
-      } else {
-        phoneElement.style.display = 'none';
-      }
-      
-      // Registration No - show/hide based on value in header
-      const regNoElements = document.querySelectorAll('[id*="displaySellerRegNo"]');
-      regNoElements.forEach(el => {
-        const parent = el.closest('p');
-        if (sellerRegNo) {
-          el.textContent = sellerRegNo;
-          if (parent) parent.style.display = '';
-        } else {
-          if (parent) parent.style.display = 'none';
-        }
-      });
+      document.getElementById('displaySellerWebsite').textContent = sellerWebsite;
+      document.getElementById('displaySellerPhone').textContent = sellerPhone;
+      document.getElementById('displaySellerRegNo').textContent = sellerRegNo;
 
       // Items Table & Calculations
       const tbody = document.getElementById('displayItems');
@@ -1550,12 +1487,6 @@
       } else {
         document.getElementById('displayPaymentTerms').textContent = 'Payment due within specified date. Late payments may incur additional charges.';
       }
-
-      // Packaging Notes
-      const packagingDetails = document.getElementById('packagingDetails').value;
-      if (packagingDetails) {
-        document.getElementById('displayPackagingNote').textContent = packagingDetails;
-      }
     }
 
     // Save/Load Data
@@ -1572,11 +1503,6 @@
         discountRate: document.getElementById('discountRate').value,
         buyerName: document.getElementById('buyerName').value,
         buyerAddress: document.getElementById('buyerAddress').value,
-        sellerName: document.getElementById('sellerName').value,
-        sellerAddress: document.getElementById('sellerAddress').value,
-        sellerWebsite: document.getElementById('sellerWebsite').value,
-        sellerPhone: document.getElementById('sellerPhone').value,
-        sellerRegNo: document.getElementById('sellerRegNo').value,
         packagingDetails: document.getElementById('packagingDetails').value,
         certificationsDetails: document.getElementById('certificationsDetails').value,
         bankSelector: document.getElementById('bankSelector').value,
@@ -1612,11 +1538,6 @@
         document.getElementById('discountRate').value = data.discountRate || 0;
         document.getElementById('buyerName').value = data.buyerName || '';
         document.getElementById('buyerAddress').value = data.buyerAddress || '';
-        document.getElementById('sellerName').value = data.sellerName || 'Matara Spice Co.';
-        document.getElementById('sellerAddress').value = data.sellerAddress || 'Malimbada, Matara, Sri Lanka';
-        document.getElementById('sellerWebsite').value = data.sellerWebsite || 'www.mataraspice.com';
-        document.getElementById('sellerPhone').value = data.sellerPhone || '+65 9425 2874';
-        document.getElementById('sellerRegNo').value = data.sellerRegNo || '251023325405';
         document.getElementById('packagingDetails').value = data.packagingDetails || '';
         document.getElementById('certificationsDetails').value = data.certificationsDetails || '';
         document.getElementById('bankSelector').value = data.bankSelector || 'HNB';
