@@ -4,9 +4,9 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   
-  <title>Matara Spice Co. | Authentic Ceylon Cinnamon & Premium Spices Direct from Sri Lanka</title>
-  <meta name="description" content="Premium Ceylon Cinnamon (Cinnamomum verum) and authentic Sri Lankan spices from the Ranawaka family estate in Malimbada, Matara. Black Pepper, Cloves, Cardamom, Turmeric, Ginger & more. Banking precision meets traditional craftsmanship. Organic, 50% profit-share with artisans. Global shipping." />
-  <meta name="keywords" content="Ceylon Cinnamon, Cinnamomum verum, Sri Lanka Cinnamon, Matara Spice Co, Organic Cinnamon, Cinnamon Quills, Cinnamon Oil, Black Pepper, Cloves, Cardamom, Nutmeg, Turmeric, Ginger, Sri Lankan Spices, Lionel Ranawaka, Sustainable Spices" />
+  <title>Matara Spice Co. | Authentic Ceylon Cinnamon & Private Spice Garden Tours in Sri Lanka</title>
+  <meta name="description" content="Experience an authentic Private Cinnamon Garden Tour in Matara. Premium Ceylon Cinnamon (Cinnamomum verum) and Sri Lankan spices from Malimbada. Family-owned heritage, organic practices, and traditional craftsmanship. Book your 2.5-hour spice experience." />
+  <meta name="keywords" content="Cinnamon Garden Tour Matara, Spice Tour Sri Lanka, Private Cinnamon Experience, Authentic Matara Attractions, Ceylon Cinnamon, Cinnamomum verum, Sri Lanka Spices, Matara Spice Co, Organic Cinnamon, Cinnamon Quills, Cinnamon Oil, Black Pepper, Cloves, Cardamom, Nutmeg, Turmeric, Ginger, Lionel Ranawaka, Sustainable Spices, Eco-tourism Sri Lanka, Farm Tour Matara, Agritourism Sri Lanka, Malimbada" />
   <meta name="author" content="Matara Spice Co." />
 
   <link rel="canonical" href="https://mataraspice.com/" />
@@ -468,11 +468,12 @@
         display: flex; 
         justify-content: space-between; 
         align-items: center; 
+        gap: 1.2rem;
         cursor: pointer; 
       font-family: inherit;
       font-size: 1.05rem;
       font-weight: 700;
-        padding: 1.5rem 0;
+        padding: 1.5rem 0.5rem;
         color: var(--ink);
     }
     
@@ -526,6 +527,9 @@
     .mini-text { font-size: 0.85rem; opacity: 0.8; margin-bottom: 0.5rem !important; }
 
     /* Form Styling */
+    @media (max-width: 600px) {
+        .form-row { grid-template-columns: 1fr; }
+    }
     .form-row {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -681,6 +685,32 @@
     @media (max-width: 900px) {
         .footer-content { grid-template-columns: 1fr 1fr; gap: 2rem; }
     }
+
+    /* Responsive Experience Section */
+    @media (max-width: 900px) {
+        .experience-grid { grid-template-columns: 1fr !important; }
+    }
+
+    /* Responsive Map Container */
+    .map-container {
+        position: relative;
+        width: 100%;
+        padding-bottom: 66.66%;
+        height: 0;
+        overflow: hidden;
+        border-radius: 8px;
+    }
+    
+    .map-container iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: none;
+        border-radius: 8px;
+    }
+
     @media (max-width: 600px) {
         .footer-content { grid-template-columns: 1fr; text-align: center; }
         .footer-brand-col { display: flex; flex-direction: column; align-items: center; }
@@ -689,6 +719,15 @@
         .footer-socials { justify-content: center; }
         .footer-bottom { flex-direction: column; gap: 0.5rem; text-align: center; }
         .footer-bottom-links{ justify-content: center; }
+    }
+
+    /* Responsive Location Card in Contact Section */
+    @media (max-width: 900px) {
+        .location-card-grid { grid-template-columns: 1fr !important; }
+        .location-card { padding: 1.5rem !important; }
+        .location-card-grid > div:first-child .map-container {
+            padding-bottom: 56.25% !important; /* 16:9 on mobile */
+        }
     }
   </style>
 
@@ -699,14 +738,102 @@
     gtag('js', new Date());
     gtag('config', 'G-JZYK1H1YPG');
   </script>
+
+  <!-- Structured Data (JSON-LD) for SEO & AI visibility -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Matara Spice Co.",
+    "url": "https://mataraspice.com",
+    "logo": "https://mataraspice.com/img/top1.webp",
+    "description": "Family-owned producer of authentic Ceylon Cinnamon and premium Sri Lankan spices from Malimbada, Matara",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Malimbada",
+      "addressRegion": "Matara",
+      "addressCountry": "LK"
+    },
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+65-9425-2874",
+      "contactType": "Customer Service"
+    }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TouristAttraction",
+    "name": "Private Cinnamon Garden Experience – Matara Spice Co.",
+    "description": "2.5-hour private guided walking tour through our family cinnamon estate featuring live demonstration of traditional Ceylon cinnamon peeling process",
+    "image": "https://mataraspice.com/img/cinFamily.webp",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Malimbada",
+      "addressLocality": "Matara",
+      "addressRegion": "Matara",
+      "postalCode": "81000",
+      "addressCountry": "LK"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": "6.006008",
+      "longitude": "80.511185"
+    },
+    "url": "https://mataraspice.com/#contact",
+    "telephone": "+65-9425-2874",
+    "price": "15.00",
+    "priceCurrency": "USD",
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "description": "7 days a week, booking via WhatsApp required at least 24 hours in advance"
+    },
+    "organizer": {
+      "@type": "Organization",
+      "name": "Matara Spice Co."
+    },
+    "availableLanguage": ["en"],
+    "audience": {
+      "@type": "Audience",
+      "audienceType": "Tourists, Spice Enthusiasts, Culinary Tourism"
+    }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Matara Spice Co.",
+    "image": "https://mataraspice.com/img/top1.webp",
+    "description": "Authentic Ceylon Cinnamon and Sri Lankan spice producer with private garden tours",
+    "url": "https://mataraspice.com",
+    "telephone": "+65-9425-2874",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Malimbada",
+      "addressLocality": "Matara",
+      "addressCountry": "LK"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": "6.006008",
+      "longitude": "80.511185"
+    },
+    "priceRange": "$$",
+    "sameAs": ["https://maps.app.goo.gl/V8yJy6DzcVfJBdKb6", "https://www.instagram.com/"]
+  }
+  </script>
 </head>
 
 <body>
 
   <nav class="nav">
     <div class="wrap nav-inner">
-      <a href="#home" aria-label="Home">
-        <img src="img/logo_croped.webp" alt="Matara Spice Co." style="height:44px; width:auto; border-radius: 6px;">
+      <a href="#home" aria-label="Home" style="flex-shrink: 0;">
+        <img src="img/logo_croped.png" alt="Matara Spice Co." style="height:40px; width:auto; border-radius: 6px; display: block;">
       </a>
 
       <div class="menu" aria-label="Primary">
@@ -806,6 +933,70 @@
              <h4 style="margin:0;">Chemical Free</h4>
              <span style="font-size:0.85rem; opacity:0.8;">Manual Weeding</span>
            </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Subsection: Private Cinnamon Garden Experience -->
+    <div class="wrap" style="margin-top: 4rem; border-top: 1px solid var(--line); padding-top: 3rem;">
+      <div style="display: grid; grid-template-columns: 1fr 1.2fr; gap: 3rem; align-items: start;" class="experience-grid">
+        <!-- Left: Image -->
+        <div>
+          <img src="img/peeling.webp" alt="Traditional cinnamon peelers at Matara Spice Co." style="border-radius: 16px; box-shadow: var(--shadow-md); width: 100%; height: auto; display: block;">
+          <p style="margin-top: 1rem; font-size: 0.9rem; color: var(--accent); font-weight: 500; text-align: center;">Meet our master cinnamon peelers</p>
+        </div>
+
+        <!-- Right: Content -->
+        <div style="max-width: 100%;">
+          <h3 style="color: var(--accent); margin-bottom: 0.5rem;">Private Cinnamon Garden Experience – 2.5 Hour Authentic Tour</h3>
+          
+          <p style="font-size: 1.05rem; line-height: 1.8; margin-bottom: 2rem; font-style: italic; color: var(--ink); opacity: 0.95;">
+            Join us for a 2.5-hour private walking tour through our family cinnamon garden in Malimbada, Matara. This is a real, authentic experience with a traditional cinnamon-peeling family — not a staged or commercial factory visit.
+          </p>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2.5rem;">
+            <!-- What to Expect -->
+            <div>
+              <h4 style="color: var(--accent); margin-bottom: 1rem; font-size: 1.1rem;">What to Expect:</h4>
+              <ul style="margin: 0; padding-left: 1.5rem; line-height: 1.9;">
+                <li>Guided walk through our cinnamon garden</li>
+                <li>Meet the founder & master peeler, Lionel</li>
+                <li>Live demonstration of the traditional Ceylon cinnamon peeling process</li>
+                <li>Step-by-step explanation of how Alba grade cinnamon is prepared</li>
+                <li>Opportunity to purchase cinnamon and other spices (advance notice required)</li>
+              </ul>
+            </div>
+
+            <!-- Important Information -->
+            <div>
+              <h4 style="color: var(--accent); margin-bottom: 1rem; font-size: 1.1rem;">Important Information:</h4>
+              <ul style="margin: 0; padding-left: 1.5rem; line-height: 1.9;">
+                <li><strong>Duration:</strong> 2.5 Hours</li>
+                <li><strong>Footwear:</strong> Wear hiking shoes (light jungle walking)</li>
+                <li><strong>Climate:</strong> Weather is warm and humid – dress accordingly</li>
+                <li><strong>Essentials:</strong> Bring insect repellent</li>
+                <li><strong>Photography:</strong> Bring a camera – you may spot peacocks, wild boars, deer and other wildlife</li>
+                <li><strong>Transportation:</strong> Hotel pick-up available (charges may apply)</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Authentic Experience Notice -->
+          <div style="background: linear-gradient(135deg, rgba(156, 107, 62, 0.05) 0%, rgba(192, 139, 90, 0.05) 100%); padding: 1.5rem; border-left: 4px solid var(--accent); border-radius: 0 12px 12px 0; margin-bottom: 1.5rem;">
+            <h4 style="color: var(--accent); margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; font-size: 1rem;">
+              <i class="ph ph-info" style="font-size: 1.2rem;"></i> Authentic Experience Notice
+            </h4>
+            <p style="margin: 0; line-height: 1.8; font-size: 0.95rem;">
+              This experience is designed for guests who appreciate real, traditional work environments. It is not a curated performance for luxury tourism — it is a genuine family operation.
+            </p>
+          </div>
+
+          <!-- Call-to-Action Button -->
+          <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+            <button onclick="inquireProduct('Private Cinnamon Garden Experience - Booking Inquiry')" class="btn btn-primary" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.9rem 2rem; font-size: 1rem;">
+              <i class="ph ph-whatsapp-logo"></i> Book Now / Contact on WhatsApp
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -981,19 +1172,6 @@
             <p style="margin: 0 0 0.5rem 0; font-size: 0.8rem; opacity: 0.7;">Whole or ground, citrus notes</p>
             <p style="margin: 0 0 0.75rem 0; font-size: 0.85rem; line-height: 1.4;">Ceylon coriander seeds with bright, citrusy flavor.</p>
             <button onclick="inquireProduct('Coriander Seeds')" class="btn btn-primary" style="width:100%; font-size: 0.85rem; padding: 0.5rem; justify-content: center;">
-              <i class="ph ph-whatsapp-logo"></i> Inquire
-            </button>
-          </div>
-        </article>
-
-        <!-- Cumin Seeds -->
-        <article class="card" style="display: flex; align-items: center; gap: 1rem; padding: 1rem; background: linear-gradient(145deg, #ffffff 0%, #fdfbf8 100%);">
-          <i class="ph ph-drop" style="font-size: 2.5rem; color: var(--accent); background: var(--bg); padding: 0.75rem; border-radius: 12px; flex-shrink: 0;"></i>
-          <div style="flex: 1; min-width: 0;">
-            <h3 style="margin: 0 0 0.25rem 0; font-size: 1.1rem; color: var(--accent);">Cumin Seeds</h3>
-            <p style="margin: 0 0 0.5rem 0; font-size: 0.8rem; opacity: 0.7;">Earthy, warm flavor</p>
-            <p style="margin: 0 0 0.75rem 0; font-size: 0.85rem; line-height: 1.4;">Premium cumin seeds with rich, earthy aroma. Foundation for curries.</p>
-            <button onclick="inquireProduct('Cumin Seeds')" class="btn btn-primary" style="width:100%; font-size: 0.85rem; padding: 0.5rem; justify-content: center;">
               <i class="ph ph-whatsapp-logo"></i> Inquire
             </button>
           </div>
@@ -1315,6 +1493,141 @@
           </div>
         </div>
 
+        <!-- Private Cinnamon Garden Experience FAQs -->
+        <div class="faq-item hidden">
+          <div class="faq-title" onclick="toggleFaq(this)">
+            🌿 Private Cinnamon Garden Experience – What is it? <i class="ph ph-caret-down"></i>
+          </div>
+          <div class="faq-content">
+            <p>Our <strong>Private Cinnamon Garden Experience</strong> is a 2.5-hour authentic, guided walking tour through our family cinnamon estate in Malimbada, Matara. You'll meet our founder and master cinnamon peelers, witness live demonstrations of traditional Ceylon cinnamon peeling, and explore the working garden where it all happens. This is a real family operation—not a commercialized tourist attraction.</p>
+          </div>
+        </div>
+
+        <div class="faq-item hidden">
+          <div class="faq-title" onclick="toggleFaq(this)">
+            What is the cost and what's included? <i class="ph ph-caret-down"></i>
+          </div>
+          <div class="faq-content">
+            <p><strong>Tour Price:</strong> USD $15 per person (excluding pickup/dropoff)</p>
+            <p><strong>What's Included:</strong></p>
+            <ul>
+              <li>2.5-hour guided walking tour of the cinnamon garden</li>
+              <li>Live demonstration of traditional cinnamon peeling process</li>
+              <li>Meet founder Lionel Ranawaka and master peelers</li>
+              <li>Step-by-step explanation of Alba grade cinnamon production</li>
+              <li><strong>Free premium cinnamon samples</strong> (subject to seasonal availability)</li>
+            </ul>
+            <p><strong>Not Included:</strong> Meals (however, you may enjoy complimentary fresh coconuts and seasonal fruits encountered during the walk)</p>
+          </div>
+        </div>
+
+        <div class="faq-item hidden">
+          <div class="faq-title" onclick="toggleFaq(this)">
+            Is there a minimum group size? Can I join solo? <i class="ph ph-caret-down"></i>
+          </div>
+          <div class="faq-content">
+            <p>No minimum group size! Solo travelers, couples, families, and groups are all welcome. The experience is personalized based on your group size, and the tour guide will tailor the pace and content to your interests.</p>
+          </div>
+        </div>
+
+        <div class="faq-item hidden">
+          <div class="faq-title" onclick="toggleFaq(this)">
+            When can I book a tour? How much notice do you need? <i class="ph ph-caret-down"></i>
+          </div>
+          <div class="faq-content">
+            <p>We offer tours <strong>any day, any season—no closed days!</strong> We can accommodate tours year-round, whether it's dry season or monsoon.</p>
+            <p><strong>Booking Notice:</strong> Ideally, provide <strong>1+ days notice</strong> so we can prepare and coordinate logistics. The more notice you give, the better we can arrange everything for you.</p>
+            <p>To book, contact us via WhatsApp with your preferred date, group size, and any special requirements.</p>
+          </div>
+        </div>
+
+        <div class="faq-item hidden">
+          <div class="faq-title" onclick="toggleFaq(this)">
+            Is there an age limit or fitness requirement? <i class="ph ph-caret-down"></i>
+          </div>
+          <div class="faq-content">
+            <p><strong>No age restrictions!</strong> Anyone can join, from children to seniors. The tour is a light jungle walk at a comfortable pace, adaptable to your fitness level. We encourage families, groups of all ages, and multi-generational travelers.</p>
+            <p><strong>What to Bring:</strong> Comfortable hiking shoes are recommended for uneven terrain. The weather is warm and humid—dress accordingly and bring sunscreen, a hat, and insect repellent.</p>
+          </div>
+        </div>
+
+        <div class="faq-item hidden">
+          <div class="faq-title" onclick="toggleFaq(this)">
+            How do I get to the garden? Is hotel pickup available? <i class="ph ph-caret-down"></i>
+          </div>
+          <div class="faq-content">
+            <p><strong>Transportation Options:</strong></p>
+            <ul>
+              <li><strong>Hotel Pickup:</strong> Available on a case-by-case basis. Additional charges may apply depending on distance. We'll coordinate your hotel and ETA before arrival.</li>
+              <li><strong>Your Own Transport:</strong> You can arrange your own transportation. We'll provide directions and contact details to coordinate your arrival time.</li>
+            </ul>
+            <p>We exchange contact information before your arrival to ensure smooth coordination and confirm your ETA.</p>
+          </div>
+        </div>
+
+        <div class="faq-item hidden">
+          <div class="faq-title" onclick="toggleFaq(this)">
+            Are there any health or safety considerations? <i class="ph ph-caret-down"></i>
+          </div>
+          <div class="faq-content">
+            <p><strong>Important:</strong> Please inform us of any allergies, medical conditions, or dietary restrictions ahead of time so our guide can prepare appropriately.</p>
+            <p>The tour involves light jungle walking on natural terrain. While wildlife (peacocks, deer, wild boars) may be spotted, they are typically non-aggressive. Bring insect repellent and protective clothing. The walk is gentle and not strenuous.</p>
+          </div>
+        </div>
+
+        <div class="faq-item hidden">
+          <div class="faq-title" onclick="toggleFaq(this)">
+            Can I take photos and videos during the tour? <i class="ph ph-caret-down"></i>
+          </div>
+          <div class="faq-content">
+            <p><strong>Photography & Recording:</strong> Yes! Feel free to take photos and videos for personal memories.</p>
+            <p><strong>Important Note:</strong> This is a private family property. While recording is permitted, please seek permission before photographing individuals or sensitive areas. The landowners retain full ownership of any professional or commercial content shot on the property and have the right to request you stop recording if needed. Always be respectful and ask first—our team will be happy to help!</p>
+          </div>
+        </div>
+
+        <div class="faq-item hidden">
+          <div class="faq-title" onclick="toggleFaq(this)">
+            What if the weather is bad? Can I reschedule? <i class="ph ph-caret-down"></i>
+          </div>
+          <div class="faq-content">
+            <p>We operate tours <strong>in all seasons and weather conditions</strong>. Rain is part of the authentic experience! The garden remains accessible during light rain, and the jungle is even more beautiful.</p>
+            <p>For extreme weather conditions, we can discuss rescheduling. Flexibility is key, and we'll work with you to find an alternative date that works for your travel plans.</p>
+          </div>
+        </div>
+
+        <div class="faq-item hidden">
+          <div class="faq-title" onclick="toggleFaq(this)">
+            Can I purchase cinnamon and spices during the tour? <i class="ph ph-caret-down"></i>
+          </div>
+          <div class="faq-content">
+            <p>Absolutely! You'll have the opportunity to purchase our premium cinnamon quills, powder, leaves, oil, and other Sri Lankan spices directly from the source.</p>
+            <p><strong>Note:</strong> Availability depends on the season and production schedule. If you're interested in specific products or larger quantities, please mention this when booking so we can ensure stock is available or prepare in advance.</p>
+          </div>
+        </div>
+
+        <div class="faq-item hidden">
+          <div class="faq-title" onclick="toggleFaq(this)">
+            How do I book the Private Cinnamon Garden Experience? <i class="ph ph-caret-down"></i>
+          </div>
+          <div class="faq-content">
+            <p>Booking is simple! Contact us via WhatsApp with the following details:</p>
+            <ul>
+              <li>Preferred tour date(s)</li>
+              <li>Number of people in your group</li>
+              <li>Any allergies or special conditions</li>
+              <li>Pickup/transportation preferences</li>
+            </ul>
+            <p><strong>WhatsApp Contact:</strong></p>
+            <ul>
+              <li>Global: +65 9425 2874</li>
+              <li>Europe & Americas (UK): +44 7710 441401</li>
+              <li>Oceania (Australia): +61 416 003 975</li>
+              <li>Asia & Africa (Japan): +81 70 9162 6937</li>
+            </ul>
+            <p>We'll confirm availability, arrange logistics, and send you the location coordinates and meeting details.</p>
+          </div>
+        </div>
+
       </div>
 
       <div style="text-align: center; margin-top: 2rem;">
@@ -1333,6 +1646,58 @@
         <span class="kicker"><i class="ph ph-chat-circle-text" style="vertical-align:middle"></i> Contact</span>
         <h2><i class="ph ph-phone-call" style="vertical-align:middle; color:var(--accent);"></i> Let's Talk Cinnamon</h2>
         <p class="muted">Questions, samples, or wholesale? We’re Worldwide — reach the branch nearest to you.</p>
+      </div>
+
+      <!-- Visit Our Cinnamon Garden Location -->
+      <div style="margin-bottom: 3rem; background: linear-gradient(135deg, rgba(156, 107, 62, 0.05) 0%, rgba(192, 139, 90, 0.03) 100%); padding: 2rem; border-radius: 16px; border: 1px solid var(--line); box-shadow: 0 8px 32px rgba(156,107,62,0.08);" class="location-card">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: start;" class="location-card-grid">
+          
+          <!-- Left: Map -->
+          <div>
+            <div class="map-container" style="position: relative; width: 100%; padding-bottom: 100%; height: 0; overflow: hidden; border-radius: 12px; box-shadow: var(--shadow-md);">
+              <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3967.9179211452633!2d80.51118521837648!3d6.006008494354987!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae1410066f86075%3A0x498a2f5b92bda703!2sCinnamon%20Garden%20by%20Matara%20Spice%20Co.!5e0!3m2!1sen!2slk!4v1772512913573!5m2!1sen!2slk" 
+                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; border-radius: 12px;" 
+                allowfullscreen="" 
+                loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade">
+              </iframe>
+            </div>
+          </div>
+
+          <!-- Right: Info -->
+          <div style="padding: 0.5rem;">
+            <h3 style="color: var(--accent); margin-bottom: 0.5rem; font-size: 1.4rem;">🌿 Visit Our Cinnamon Garden</h3>
+            
+            <p style="font-size: 1.05rem; line-height: 1.8; margin-bottom: 1.5rem; color: var(--ink); opacity: 0.9;">
+              Experience the authentic cinnamon garden where our family has perfected traditional peeling for generations.
+            </p>
+
+            <div style="background: #fff; padding: 1.5rem; border-radius: 10px; margin-bottom: 1.5rem; border-left: 4px solid var(--accent);">
+              <p style="margin: 0 0 0.5rem 0; font-weight: 600; font-size: 0.95rem; color: var(--accent);">📍 Malimbada, Matara, Sri Lanka</p>
+              <p style="margin: 0; font-size: 0.9rem; opacity: 0.85;">Cinnamon Garden by Matara Spice Co.</p>
+            </div>
+
+            <div style="background: #fff; padding: 1.5rem; border-radius: 10px; margin-bottom: 1.5rem;">
+              <h4 style="color: var(--accent); margin: 0 0 1rem 0; font-size: 1rem;">The Experience:</h4>
+              <ul style="margin: 0; padding-left: 1.5rem; line-height: 2; font-size: 0.95rem;">
+                <li>2.5-hour guided garden tour</li>
+                <li>Live cinnamon peeling demo</li>
+                <li>Meet founder Lionel Ranawaka</li>
+                <li>$15 per person • Any season</li>
+              </ul>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+              <a href="https://maps.app.goo.gl/V8yJy6DzcVfJBdKb6" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; border: none; padding: 0.8rem 1.5rem; text-decoration: none;">
+                <i class="ph ph-map"></i> Get Directions
+              </a>
+              <a href="#story" class="btn btn-outline" style="display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; border-color: var(--accent); color: var(--accent); padding: 0.8rem 1.5rem; text-decoration: none;">
+                <i class="ph ph-arrow-up-right"></i> Learn More About Tour
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div class="contact-grid">
@@ -1439,7 +1804,7 @@
         
         <div class="footer-brand-col">
           <div class="footer-logo-wrap">
-             <img src="img/footer_logo.webp" alt="Matara Spice Co." loading="lazy">
+             <img src="img/footer_logo.png" alt="Matara Spice Co." loading="lazy">
           </div>
           <p>The World's Purest Cinnamon.<br>From Sri Lanka with Love.</p>
         </div>
