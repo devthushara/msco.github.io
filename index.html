@@ -51,6 +51,11 @@
     }
 
     /* --- GLOBAL RESET & TYPOGRAPHY --- */
+    html, body {
+      overflow-x: hidden;
+      width: 100%;
+      position: relative;
+    }
     html{scroll-behavior:smooth; scroll-padding-top: 110px;}
     *{box-sizing:border-box}
     body{
@@ -416,6 +421,7 @@
             margin-right: -1rem; /* Allow scroll to edge of screen */
             padding-right: 1rem;
             gap: 1rem;
+            width: calc(100% + 1rem); /* Compensate for negative margin */
             
             /* Hide scrollbar visually */
             scrollbar-width: none; 
@@ -581,6 +587,33 @@
         100% { background-color: transparent; }
     }
     @keyframes fadeIn { from {opacity:0; transform:translateY(-5px);} to {opacity:1; transform:translateY(0);} }
+
+    /* --- BOOKING MODAL --- */
+    .modal-overlay {
+      position: fixed; inset: 0; background: rgba(42, 28, 18, 0.6);
+      backdrop-filter: blur(8px); z-index: 3000; display: none;
+      align-items: center; justify-content: center; padding: 1.5rem;
+    }
+    .modal-overlay.active { display: flex; animation: fadeIn 0.3s ease; }
+    .modal-card {
+      background: #fff; width: 100%; max-width: 500px; border-radius: 20px;
+      padding: 2rem; box-shadow: var(--shadow-md); position: relative;
+    }
+    .modal-close {
+      position: absolute; top: 1.2rem; right: 1.2rem; font-size: 1.5rem;
+      cursor: pointer; color: var(--ink); opacity: 0.5; transition: opacity 0.2s;
+    }
+    .modal-close:hover { opacity: 1; }
+    .modal-card h3 { color: var(--accent); margin-bottom: 0.5rem; }
+    .modal-card p { font-size: 0.9rem; margin-bottom: 1.5rem; opacity: 0.8; }
+    .modal-form .field { margin-bottom: 1.2rem; }
+    .modal-form label { display: block; font-weight: 600; font-size: 0.85rem; margin-bottom: 0.4rem; color: var(--ink); }
+    .modal-form input, .modal-form textarea, .modal-form select {
+      width: 100%; padding: 0.8rem 1rem; border: 1px solid var(--line); border-radius: 10px;
+      font-family: inherit; font-size: 0.95rem; background: var(--bg);
+    }
+    .modal-form .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    @media (max-width: 480px) { .modal-form .grid { grid-template-columns: 1fr; } }
 
     /* --- FORM --- */
     .contact-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 4rem; }
@@ -993,8 +1026,8 @@
 
           <!-- Call-to-Action Button -->
           <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-            <button onclick="openCinnamonBooking()" class="btn btn-primary" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.9rem 2rem; font-size: 1rem;">
-              <i class="ph ph-calendar"></i> Book Now
+            <button onclick="openBookingModal()" class="btn btn-primary" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.9rem 2rem; font-size: 1rem; background: #25D366; color: #fff;">
+              <i class="ph ph-whatsapp-logo"></i> Inquire About Booking & Prices
             </button>
           </div>
         </div>
@@ -1518,7 +1551,7 @@
               <li><strong>Free premium cinnamon samples</strong> (subject to seasonal availability)</li>
             </ul>
             <p><strong>Not Included:</strong> Meals (however, you may enjoy complimentary fresh coconuts and seasonal fruits encountered during the walk)</p>
-            <p style="margin-top: 1.5rem;"><button onclick="openWhatsApp()" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.7rem 1.2rem; border: none; cursor: pointer; background: #25D366; color: #fff;"><i class="ph ph-whatsapp-logo"></i> Get Pricing Details on WhatsApp</button></p>
+            <p style="margin-top: 1.5rem;"><button onclick="openBookingModal()" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.7rem 1.2rem; border: none; cursor: pointer; background: #25D366; color: #fff;"><i class="ph ph-whatsapp-logo"></i> Get Pricing Details & Book on WhatsApp</button></p>
           </div>
         </div>
 
@@ -1693,7 +1726,7 @@
               <a href="https://maps.app.goo.gl/V8yJy6DzcVfJBdKb6" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; border: none; padding: 0.8rem 1.5rem; text-decoration: none;">
                 <i class="ph ph-map"></i> Get Directions
               </a>
-              <button onclick="openWhatsApp()" class="btn btn-primary" style="display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; border: none; padding: 0.8rem 1.5rem; cursor: pointer; background: #25D366; color: #fff;">
+              <button onclick="openBookingModal()" class="btn btn-primary" style="display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; border: none; padding: 0.8rem 1.5rem; cursor: pointer; background: #25D366; color: #fff;">
                 <i class="ph ph-whatsapp-logo"></i> Inquire About Booking & Prices
               </button>
               <a href="#story" class="btn btn-outline" style="display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; border-color: var(--accent); color: var(--accent); padding: 0.8rem 1.5rem; text-decoration: none;">
@@ -1943,6 +1976,66 @@
         window.open(`https://wa.me/${cleanNum}?text=Hello%20Matara%20Spice%20Co!`, '_blank');
     }
 
+    // --- BOOKING MODAL LOGIC ---
+    function openBookingModal() {
+        const modal = document.getElementById('bookingModalOverlay');
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeBookingModal() {
+        const modal = document.getElementById('bookingModalOverlay');
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    function handleOutsideClick(e) {
+        if(e.target.id === 'bookingModalOverlay') closeBookingModal();
+    }
+
+    function togglePickupLocation() {
+        const checkbox = document.getElementById('bookPickup');
+        const wrapper = document.getElementById('pickupLocationWrapper');
+        wrapper.style.display = checkbox.checked ? 'block' : 'none';
+        if (checkbox.checked) {
+            document.getElementById('bookLocation').focus();
+        }
+    }
+
+    function handleBookingSubmit(e) {
+        e.preventDefault();
+        const name = document.getElementById('bookName').value || 'Not specified';
+        const dates = document.getElementById('bookDates').value || 'To be discussed';
+        const pax = document.getElementById('bookPax').value || 'Not specified';
+        const notes = document.getElementById('bookNotes').value;
+        const needsPickup = document.getElementById('bookPickup').checked;
+        const location = document.getElementById('bookLocation').value;
+        const wantsToBuy = document.getElementById('bookBuy').checked;
+
+        let message = `👋 Hello Matara Spice Co! 🌿\n\n` +
+                        `I'm interested in booking a Private Cinnamon Garden Tour.\n\n` +
+                        `👤 Name: ${name}\n` +
+                        `📅 Preferred Dates: ${dates}\n` +
+                        `👥 Pax: ${pax}\n`;
+
+        if (needsPickup) {
+            message += `🚗 Transport: Required\n📍 Location: ${location}\n`;
+        } else {
+            message += `🚗 Transport: Self-Driving\n`;
+        }
+
+        if (wantsToBuy) {
+            message += `🛍️ Shopping: Interested in buying spices\n`;
+        }
+
+        message += `📝 Notes: ${notes || 'None'}\n\n` +
+                   `Please let me know the current prices and availability!`;
+        
+        const encodedMsg = encodeURIComponent(message);
+        window.open(`https://wa.me/6594252874?text=${encodedMsg}`, '_blank');
+        closeBookingModal();
+    }
+
     // 3.5. Product Inquiry via WhatsApp
     function inquireProduct(productName){
         const message = `Hello Matara Spice Co! I'm interested in: ${productName}`;
@@ -2108,6 +2201,61 @@
     ]
   }
   </script>
+
+  <!-- Booking Modal -->
+  <div class="modal-overlay" id="bookingModalOverlay" onclick="handleOutsideClick(event)">
+    <div class="modal-card">
+      <span class="modal-close" onclick="closeBookingModal()">&times;</span>
+      <h3 style="display: flex; align-items: center; gap: 0.8rem; margin: 0 0 1rem;"><i class="ph ph-calendar-check" style="font-size: 1.5rem;"></i> Tour Inquiry</h3>
+      <p style="margin-bottom: 1.5rem; font-size: 0.95rem; opacity: 0.8;">Fill in any details below, or just click "Send" to chat with us on WhatsApp about your booking. None of these fields are mandatory.</p>
+      
+      <form class="modal-form" id="bookingForm" onsubmit="handleBookingSubmit(event)">
+        <div class="field" style="margin-bottom: 1.2rem;">
+          <label style="display: block; font-weight: 600; margin-bottom: 0.5rem; font-size: 0.9rem;">Your Name</label>
+          <input type="text" id="bookName" placeholder="Full Name (optional)" style="width: 100%; padding: 0.8rem; border: 1px solid var(--line); border-radius: 10px; background: var(--bg);" />
+        </div>
+        
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.2rem;">
+          <div class="field">
+            <label style="display: block; font-weight: 600; margin-bottom: 0.5rem; font-size: 0.9rem;">Possible Dates</label>
+            <input type="text" id="bookDates" placeholder="e.g. June 15-20" style="width: 100%; padding: 0.8rem; border: 1px solid var(--line); border-radius: 10px; background: var(--bg);" />
+          </div>
+          <div class="field">
+            <label style="display: block; font-weight: 600; margin-bottom: 0.5rem; font-size: 0.9rem;">Guest Count (Pax)</label>
+            <input type="number" id="bookPax" min="1" placeholder="2" style="width: 100%; padding: 0.8rem; border: 1px solid var(--line); border-radius: 10px; background: var(--bg);" />
+          </div>
+        </div>
+
+        <div class="field" style="margin-bottom: 1.2rem;">
+          <label style="display: flex; align-items: center; gap: 0.7rem; font-weight: 600; font-size: 0.9rem; cursor: pointer;">
+            <input type="checkbox" id="bookPickup" style="width: auto; margin-bottom: 0;" onchange="togglePickupLocation()"> 
+            I need pickup and dropoff
+          </label>
+        </div>
+
+        <div id="pickupLocationWrapper" class="field" style="margin-bottom: 1.2rem; display: none;">
+          <label style="display: block; font-weight: 600; margin-bottom: 0.5rem; font-size: 0.9rem;">Pickup/Dropoff Location (Hotel/Villa/Restaurant)</label>
+          <input type="text" id="bookLocation" placeholder="Name of your stay in Matara/Weligama/Mirissa" style="width: 100%; padding: 0.8rem; border: 1px solid var(--line); border-radius: 10px; background: var(--bg);" />
+        </div>
+
+        <div class="field" style="margin-bottom: 1.2rem;">
+          <label style="display: flex; align-items: center; gap: 0.7rem; font-weight: 600; font-size: 0.9rem; cursor: pointer;">
+            <input type="checkbox" id="bookBuy" style="width: auto; margin-bottom: 0;"> 
+            I'm interested in buying cinnamon/spices after the tour
+          </label>
+        </div>
+        
+        <div class="field" style="margin-bottom: 1.5rem;">
+          <label style="display: block; font-weight: 600; margin-bottom: 0.5rem; font-size: 0.9rem;">Special Notes & Requests</label>
+          <textarea id="bookNotes" rows="3" placeholder="Dietary needs, preferred time, transport, firefly extensions, etc..." style="width: 100%; padding: 0.8rem; border: 1px solid var(--line); border-radius: 10px; background: var(--bg);"></textarea>
+        </div>
+        
+        <button type="submit" class="btn btn-primary" style="width: 100%; display: flex; align-items: center; justify-content: center; gap: 0.8rem; background: #25D366; border: none; padding: 1rem; color: #fff; font-weight: bold; border-radius: 12px; cursor: pointer;">
+          <i class="ph ph-whatsapp-logo"></i> Send Booking Inquiry
+        </button>
+      </form>
+    </div>
+  </div>
   
   <script type="application/ld+json">
   {
